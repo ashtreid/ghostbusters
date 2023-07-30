@@ -1,5 +1,8 @@
 // Note: All code below was transferred from Module 22, Activity 18 - JWT Review
 
+// resolvers need updating to match what is defined in notion document
+
+
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Thought } = require('../models');
 const { signToken } = require('../utils/auth');
