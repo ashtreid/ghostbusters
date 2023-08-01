@@ -21,12 +21,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  pins: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Pin',
     },
-  ],
+  ]
 });
 
 userSchema.pre('save', async function (next) {

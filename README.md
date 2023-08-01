@@ -1,7 +1,8 @@
 # Ghostbusters ![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 
 ## Description 
-This project... 
+TODO: Update later
+This project features the webpage for the Ghostbusters website. The Ghostbusters website is a place where users can go to find information about the Ghostbusters, the services they offer, and the team members. Users can also register an account and login to access the Ghostbusters' blog, where they can post their own stories about their experiences with the paranormal.
 
 ## Table of Contents
 * [Presentation](#presentation)
@@ -30,10 +31,10 @@ N/A
 
 ## Credits 
 A big thank you to the Ghostbusters team, without whom this project would not have been possible:
-* [ashtreid](https://github.com/ashtreid)
-* [pbodybrooks](https://github.com/pbodybrooks)
-* [Rayne Github](https://github.com/)
-* [Todd Github](https://github.com/)
+* [Ash](https://github.com/ashtreid)
+* [Parker](https://github.com/pbodybrooks)
+* [Rayne](https://github.com/Childofrainydays)
+* [Todd](https://github.com/AegeanGrey)
 
 ## License
 This application is covered under the [MIT](https://opensource.org/licenses/MIT) license.
@@ -49,8 +50,8 @@ N/A
 
 ## Questions 
 You can find us on GitHub at:
-* [ashtreid](https://github.com/ashtreid)
-* [PBodyBrooks](https://github.com/PBodyBrooks)
-* [Rayne Github](https://github.com/)
-* [Todd Github](https://github.com/)
+* [Ash](https://github.com/ashtreid)
+* [Parker](https://github.com/PBodyBrooks)
+* [Rayne](https://github.com/Childofrainydays)
+* [Todd](https://github.com/AegeanGrey)
 
