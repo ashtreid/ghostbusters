@@ -25,7 +25,6 @@ const pinSchema = new Schema({
     min: -180,
     max: 180,
   },
-  // Sprinkle
   pinClassification: {
     type: String,
     required: true,
