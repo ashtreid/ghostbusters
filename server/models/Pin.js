@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 // Spectral Classifications
-const allowedPinTypes = [
+const allowedClassifications = [
   "Class I",
   "Class II",
   "Class III",
@@ -26,10 +26,10 @@ const pinSchema = new Schema({
     max: 180,
   },
   // Sprinkle
-  pinType: {
+  pinClassification: {
     type: String,
     required: true,
-    enum: allowedPinTypes,
+    enum: allowedClassifications,
   },
   pinTitle: {
     type: String,

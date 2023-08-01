@@ -11,7 +11,9 @@ const typeDefs = gql`
 
   type Pin {
     _id: ID
-    pinLocation: String
+    pinLat: Number
+    pinLon: Number
+    pinClassification: String
     pinTitle: String
     pinText: String
     pinAuthor: String
@@ -35,6 +37,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     pins(username: String): [Pin]
+    pins(pinClassification: String): [Pin]
     pin(pinId: ID!): Pin
     me: User
   }
@@ -44,7 +47,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
 
     # TODO: addPin will need some tweaks for location (lat, lon) to work with the map
-    addPin(pinLat: Number!, pinLon: Number!, pinTitle: String! pinText: String!): Pin
+    addPin(pinLat: Number!, pinLon: Number!, pinClassification: String!, pinTitle: String!, pinText: String!): Pin
 
     removePin(pinId: ID!): Pin
     addComment(pinId: ID!, commentText: String!): Pin
