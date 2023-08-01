@@ -28,12 +28,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
   },
 
   Mutation: {
@@ -95,6 +89,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You must log in to delete a pin!');
     },
+    
     addComment: async (parent, { pinId, commentText }, context) => {
       if (context.user) {
         return Pin.findOneAndUpdate(
