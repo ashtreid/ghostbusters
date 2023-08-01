@@ -1,25 +1,32 @@
-// Reference Module 22, Activity 18 - JWT Review
-
-// TODO: Update functions that fulfill the queries defined in `typeDefs.js`
-
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Pin } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('thoughts');
+      return User.find().populate('pins');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts');
+      return User.findOne({ username }).populate('pins');
     },
-    thoughts: async (parent, { username }) => {
+    pins: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+      return Pin.find(params).sort({ createdAt: -1 });
     },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    pins: async (parent, { pinClassification }) => {
+      const params = pinClassification ? { pinClassification } : {};
+      return Pin.find(params).sort({ createdAt: -1 });
+    },
+    pin: async (parent, { pinId }) => {
+      return Pin.findOne({ _id: pinId });
+    },
+    // TODO: Ensure we are storing user context (particularly _id) correctly in the JWT. This is essential for pins and comments to show the author
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('pins');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -39,7 +46,7 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError('No user exists with the provided email address!');
       }
 
       const correctPw = await user.isCorrectPassword(password);
@@ -52,26 +59,46 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { thoughtText }, context) => {
+    addPin: async (parent, { pinLat, pinLon, pinClassification, pinTitle, pinText }, context) => {
       if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
+        const pin = await Pin.create({
+          pinLat,
+          pinLon,
+          pinClassification,
+          pinTitle,
+          pinText,
+          pinAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
+          { $addToSet: { pins: pin._id } }
         );
 
-        return thought;
+        return pin;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You must log in to add a new pin!');
     },
-    addComment: async (parent, { thoughtId, commentText }, context) => {
+    removePin: async (parent, { pinId }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
+        const pin = await Pin.findOneAndDelete({
+          _id: pinId,
+          pinAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { pins: pin._id } }
+        );
+
+        return pin;
+      }
+      throw new AuthenticationError('You must log in to delete a pin!');
+    },
+    addComment: async (parent, { pintId, commentText }, context) => {
+      if (context.user) {
+        return Pin.findOneAndUpdate(
+          { _id: pinId },
           {
             $addToSet: {
               comments: { commentText, commentAuthor: context.user.username },
@@ -83,28 +110,12 @@ const resolvers = {
           }
         );
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You must log in to add a comment!');
     },
-    removeThought: async (parent, { thoughtId }, context) => {
+    removeComment: async (parent, { pinId, commentId }, context) => {
       if (context.user) {
-        const thought = await Thought.findOneAndDelete({
-          _id: thoughtId,
-          thoughtAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { thoughts: thought._id } }
-        );
-
-        return thought;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    removeComment: async (parent, { thoughtId, commentId }, context) => {
-      if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
+        return Pin.findOneAndUpdate(
+          { _id: pinId },
           {
             $pull: {
               comments: {
@@ -116,7 +127,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You must log in to delete a comment!');
     },
   },
 };
