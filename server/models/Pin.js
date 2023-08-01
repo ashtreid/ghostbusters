@@ -1,12 +1,35 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-
+// Spectral Classifications
+const allowedClassifications = [
+  "Class I",
+  "Class II",
+  "Class III",
+  "Class IV",
+  "Class V",
+  "Class VI",
+  "Class VII",
+];
 
 const pinSchema = new Schema({
-  pinLocation: {
+  pinLat: {
+    type: Number,
+    required: true,
+    min: -90,
+    max: 90,
+  },
+  pinLon: {
+    type: Number,
+    required: true,
+    min: -180,
+    max: 180,
+  },
+  // Sprinkle
+  pinClassification: {
     type: String,
-    // TODO: What kind of properties do we need to define for the location? How will it work with the map?
+    required: true,
+    enum: allowedClassifications,
   },
   pinTitle: {
     type: String,

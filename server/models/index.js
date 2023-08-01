@@ -1,9 +1,7 @@
-// TODO: Either keep thought for comments or delete and replace with Comment.js
-// const Thought = require('./Thought');
+// reference Module 22, Activity 18 - JWT Review for Models
 
 const User = require('./User');
-const Location = require('./Location');
+const Pin = require('./Pin');
 
-// module.exports = { Thought, User, Location };
-module.exports = { User, Location };
+module.exports = { User, Pin };
 

@@ -1,7 +1,3 @@
-// Note: All code below was transferred from Module 22, Activity 18 - JWT Review
-
-// typeDef need updating to match what is defined in notion document
-
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -10,13 +6,17 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    pins: [Pin]!
   }
 
-  type Thought {
+  type Pin {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
+    pinLat: Float
+    pinLon: Float
+    pinClassification: String
+    pinTitle: String
+    pinText: String
+    pinAuthor: String
     createdAt: String
     comments: [Comment]!
   }
@@ -36,18 +36,22 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    # pins(username: String): [Pin]
+    pins(pinClassification: String): [Pin]
+    pin(pinId: ID!): Pin
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+
+    # TODO: addPin will need some tweaks for location (lat, lon) to work with the map
+    addPin(pinLat: Float!, pinLon: Float!, pinClassification: String!, pinTitle: String!, pinText: String!): Pin
+
+    removePin(pinId: ID!): Pin
+    addComment(pinId: ID!, commentText: String!): Pin
+    removeComment(pinId: ID!, commentId: ID!): Pin
   }
 `;
 
