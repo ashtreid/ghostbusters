@@ -17,6 +17,12 @@ const commentSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
+    // refto the pin this comment belongs to
+    pinId: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Pin', 
+        required: true 
+    },
 });
 
 const Comment = model('Comment', commentSchema);

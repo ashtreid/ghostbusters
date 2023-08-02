@@ -82,6 +82,11 @@ const pinSchema = new Schema({
   // ],
 });
 
+// virtual for comment count
+pinSchema.virtual('commentCount').get(function () {
+  return this.comments.length;
+});
+
 const Pin = model('Pin', pinSchema);
 
 module.exports = Pin;
