@@ -1,3 +1,5 @@
+// Output looks like: Jan 10th, 2023 at 11:00 am
+
 const addDateSuffix = (date) => {
   let dateStr = date.toString();
 

@@ -1,17 +1,21 @@
 const db = require('../config/connection');
 
-//TODO: Import correct models
-// const { User } = require('../models');
-// const { Location } = require('../models');
+const { User } = require('../models');
+const { Pin } = require('../models');
+const { Comment } = require('../models');
+
 
 const userSeeds = require('./userSeeds.json');
-const locationSeeds = require('./locationSeeds.json');
+const pinSeeds = require('./pinSeeds.json');
+const commentSeeds = require('./commentSeeds.json');
 
 db.once('open', async () => {
   await User.deleteMany({});
-  await Location.deleteMany({});
+  await Pin.deleteMany({});
+  await Comment.deleteMany({});
   await User.create(userSeeds);
-  await Location.create(locationSeeds);
+  await Pin.create(pinSeeds);
+  await Comment.create(commentSeeds);
 
   console.log('all done!');
   process.exit(0);

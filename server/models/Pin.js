@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const Comment = require('./Comment');
 const dateFormat = require('../utils/dateFormat');
 
 // Spectral Classifications
@@ -25,7 +26,6 @@ const pinSchema = new Schema({
     min: -180,
     max: 180,
   },
-  // Sprinkle
   pinClassification: {
     type: String,
     required: true,
@@ -55,6 +55,7 @@ const pinSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
+  // comments: [Comment],
   comments: [
     {
       commentText: {

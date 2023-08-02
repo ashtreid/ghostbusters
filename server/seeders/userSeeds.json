@@ -1,12 +1,17 @@
 [
   {
-    "username": "PBodyBrooks",
-    "email": "email@email.com",
+    "username": "ilovebustin",
+    "email": "bustin@makesmefeelgood.com",
     "password": "password123"
   },
   {
-    "username": "Lernantino",
-    "email": "lernantino@techfriends.dev",
-    "password": "password10"
+    "username": "Beenus",
+    "email": "beenus@gmail.com",
+    "password": "password123"
+  },
+  {
+    "username": "Michelle from Band Camp",
+    "email": "michelle@flutefun.net",
+    "password": "password123"
   }
 ]
