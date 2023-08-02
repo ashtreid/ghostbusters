@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Map from './pages/Map';
+import Footer from './components/Footer'
 
 function App() {
   return (
     <Router>
-      <>
+      <div className='d-flex flex-column min-vh-100'>
         <Header />
         <Routes>
           <Route
@@ -20,7 +21,8 @@ function App() {
             element={<Map />}
           />
         </Routes>
-      </>
+      </div>
+      <Footer />
     </Router>
   );
 }
