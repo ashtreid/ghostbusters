@@ -89,7 +89,8 @@ const resolvers = {
       }
       throw new AuthenticationError('You must log in to delete a pin!');
     },
-    addComment: async (parent, { pintId, commentText }, context) => {
+    
+    addComment: async (parent, { pinId, commentText }, context) => {
       if (context.user) {
         return Pin.findOneAndUpdate(
           { _id: pinId },
@@ -127,3 +128,4 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
