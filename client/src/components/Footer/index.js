@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className='bg-secondary mt-auto'>
             <Container className='p-3'>
-                <p className='text-center text-white'>Who you gonna call?</p>
+                <p className='text-center text-white'>Our courteous and efficient staff are on call 24-hours a day to serve ALL your supernatural elimination needs.</p>
                 <Row>
                     <Col className='text-center'>
                         <p>Phone: ###-###-####</p>
