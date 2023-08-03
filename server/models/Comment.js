@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const commentSchema = new Schema({
+    // TODO: (delete this if not needed?) ref to the pinId this comment belongs to
     commentText: {
         type: String,
         required: true,
@@ -16,12 +17,6 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
-    },
-    // refto the pin this comment belongs to
-    pinId: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'Pin', 
-        required: true 
     },
 });
 

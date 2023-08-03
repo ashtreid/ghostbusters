@@ -1,8 +1,27 @@
 [
     {
-        "pinId": "PLACEHOLDER",
         "commentText": "Wow, spooky!",
         "commentAuthor": "ilovebustin",
+        "createdAt": "2023-07-27T12:15:00.000Z"
+    },
+    {
+        "commentText": "I'm quakin' in my boots!",
+        "commentAuthor": "ilovebustin",
+        "createdAt": "2023-07-27T12:15:00.000Z"
+    },
+    {
+        "commentText": "Extremely Scary",
+        "commentAuthor": "Michelle from Band Camp",
+        "createdAt": "2023-07-27T12:15:00.000Z"
+    },
+    {
+        "commentText": "Ah!",
+        "commentAuthor": "Beenus",
+        "createdAt": "2023-07-27T12:15:00.000Z"
+    },
+    {
+        "commentText": "Terrifying!",
+        "commentAuthor": "Beenus",
         "createdAt": "2023-07-27T12:15:00.000Z"
     }
 ]
