@@ -2,75 +2,26 @@ const db = require('../config/connection');
 
 const { User } = require('../models');
 const { Pin } = require('../models');
-const { Comment } = require('../models');
-
+// TODO: Delete this later:
+// const { Comment } = require('../models');
 
 const userSeeds = require('./userSeeds.json');
 const pinSeeds = require('./pinSeeds.json');
-const commentSeeds = require('./commentSeeds.json');
-
-// db.once('open', async () => {
-//   try {
-//     // delete existing data
-//     await User.deleteMany({});
-//     await Pin.deleteMany({});
-//     await Comment.deleteMany({});
-
-//     // seed Users and Pins
-//     const createdUsers = await User.insertMany(userSeeds);
-//     const createdPins = await Pin.insertMany(pinSeeds);
-
-//     // for each pin, create multiple comments
-//     for (const pin of createdPins) {
-      
-//       // randomly decide how many comments this pin should have
-//       const numberOfComments = Math.floor(Math.random() * 5); // this will give a number between 0 and 4
-
-//       for (let i = 0; i < numberOfComments; i++) {
-//         // choose a random comment seed 
-//         const commentSeed = commentSeeds[Math.floor(Math.random() * commentSeeds.length)];
-
-//         // create the comment for this pin
-//         const comment = await Comment.create({
-//           pinId: pin._id,
-//           ...commentSeed,
-//         });
-
-//         // add the comment to the pin's comments array
-//         pin.comments.push(comment._id);
-//       }
-//       await pin.save();
-//     }
-
-//     console.log('Database seeding complete.');
-//     process.exit(0);
-//   } catch (error) {
-//     console.error('Error seeding database:', error);
-//     process.exit(1);
-//   }
-// });
+// TODO: Delete this later:
+// const commentSeeds = require('./commentSeeds.json');
 
 db.once('open', async () => {
   try {
-    // delete existing data
+    // delete existing data when data is seeded
     await User.deleteMany({});
     await Pin.deleteMany({});
-    await Comment.deleteMany({});
+    // TODO: Delete this later:
+    // await Comment.deleteMany({});
 
-    // seed Users, Pins, and Comments
+    // seed Users and Pins (with comments)
     const createdUsers = await User.insertMany(userSeeds);
     const createdPins = await Pin.insertMany(pinSeeds);
-    // const createdComments = await Comment.insertMany(commentSeeds);
-
-    // update the comments array in the corresponding pins
-    // for (const comment of createdComments) {
-    //   const pinId = comment.pinId; 
-    //   const pinToUpdate = createdPins.find((pin) => pin._id === pinId);
-    //   if (pinToUpdate) {
-    //     pinToUpdate.comments.push(comment._id);
-    //     await pinToUpdate.save();
-    //   }
-    // }
+    // const createdComments = await Comment.insertMany(commentSeeds)
 
     console.log('Database seeding complete.');
     process.exit(0);
@@ -97,3 +48,13 @@ db.once('open', async () => {
 //   console.log('all done!');
 //   process.exit(0);
 // });
+
+// update the comments array in the corresponding pins
+// for (const comment of createdComments) {
+//   const pinId = comment.pinId;
+//   const pinToUpdate = createdPins.find((pin) => pin._id === pinId);
+//   if (pinToUpdate) {
+//     pinToUpdate.comments.push(comment._id);
+//     await pinToUpdate.save();
+//   }
+// }
