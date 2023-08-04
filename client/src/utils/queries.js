@@ -1,5 +1,20 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_USERS = gql`
+  query getUsers {
+    users {
+      _id
+      username
+      email
+      pins {
+        _id
+        pinText
+        createdAt
+      }
+    }
+  }
+`;
+
 export const QUERY_USER = gql`
   query user($username: String!) {
     user(username: $username) {
@@ -28,7 +43,7 @@ export const QUERY_PINS = gql`
 
 export const QUERY_SINGLE_PIN = gql`
   query getSinglepin($pinId: ID!) {
-    thought(pinId: $pinId) {
+    pin(pinId: $pinId) {
       _id
       pinText
       pinAuthor
