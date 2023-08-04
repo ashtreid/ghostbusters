@@ -6,6 +6,8 @@ import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
     const [userLocation, setUserLocation] = useState(null);
+    // useState([]) to initialize a state variable with an empty array as its initial value
+    const [pins, setPins] = useState([])
 
     // function for map click to add pins
     const handleMapClick = (event) => {
