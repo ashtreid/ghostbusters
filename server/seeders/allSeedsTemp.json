@@ -1,0 +1,80 @@
+[
+    {
+      "username": "ilovebustin",
+      "email": "bustin@makesmefeelgood.com",
+      "password": "password123",
+      "pins": {
+        "pinLat": 38.8860,
+        "pinLon": -76.9995,
+        "pinClassification": "Class IV",
+        "pinTitle": "Spotted an old ghostly figure bearing a strong resemblance to Henry Kissinger outside capitol hill after dark.",
+        "pinText": "Wikipedia reveals he is 100 and still alive. Not sure what he was doing out of bed so late.",
+        "pinAuthor": "ilovebustin",
+        "createdAt": "2023-06-08T03:33:00.000Z",
+        "comments": [
+          {
+            "commentText": "Extremely Scary",
+            "commentAuthor": "Michelle from Band Camp",
+            "createdAt": "2023-07-27T12:15:00.000Z"
+          }
+        ]
+      }
+    },
+    {
+      "username": "Beenus",
+      "email": "beenus@gmail.com",
+      "password": "password123",
+      "pins": {
+        "pinLat": 43.9838,
+        "pinLon": -69.3341,
+        "pinClassification": "Class II",
+        "pinTitle": "I think I found Casper ya'll",
+        "pinText": "He was friendly but honestly pretty annoying and I left shortly after meeting him.",
+        "pinAuthor": "Beenus",
+        "createdAt": "2017-09-27T11:11:00.000Z",
+        "comments": [
+          {
+            "commentText": "This comment is super unqiue!",
+            "commentAuthor": "ilovebustin",
+            "createdAt": "2023-07-27T12:15:00.000Z"
+          }
+        ]
+      }
+    },
+    {
+      "username": "Michelle from Band Camp",
+      "email": "michelle@flutefun.net",
+      "password": "password123",
+      "pins": {
+        "pinLat": 42.9411,
+        "pinLon": -85.6100,
+        "pinClassification": "Class I",
+        "pinTitle": "Very Spooky Ghost Spotted!",
+        "pinText": "This one time, at band camp, I saw a ghost and it was very spooky.",
+        "pinAuthor": "Michelle from Band Camp",
+        "createdAt": "1999-07-09T15:46:00.000Z",
+        "comments": [
+          {
+            "commentText": "Wow, spooky!",
+            "commentAuthor": "ilovebustin",
+            "createdAt": "2023-07-27T12:15:00.000Z"
+          },
+          {
+            "commentText": "I'm quakin' in my boots!",
+            "commentAuthor": "ilovebustin",
+            "createdAt": "2023-07-27T12:15:00.000Z"
+          },
+          {
+            "commentText": "Ah!",
+            "commentAuthor": "Beenus",
+            "createdAt": "2023-07-27T12:15:00.000Z"
+          },
+          {
+            "commentText": "Terrifying!",
+            "commentAuthor": "Beenus",
+            "createdAt": "2023-07-27T12:15:00.000Z"
+          }
+        ]
+      }
+    }
+  ]
