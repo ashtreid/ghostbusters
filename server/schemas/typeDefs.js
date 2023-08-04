@@ -36,8 +36,8 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
-    # pins(username: String): [Pin]
-    pins(pinClassification: String): [Pin]
+    pins: [Pin]
+    # pins(pinClassification: String): [Pin]
     pin(pinId: ID!): Pin
     me: User
   }

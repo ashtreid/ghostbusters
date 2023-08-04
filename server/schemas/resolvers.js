@@ -10,14 +10,17 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('pins');
     },
+    pins: async () => {
+      return Pin.find().populate('pins');
+    },
     pins: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Pin.find(params).sort({ createdAt: -1 });
     },
-    pins: async (parent, { pinClassification }) => {
-      const params = pinClassification ? { pinClassification } : {};
-      return Pin.find(params).sort({ createdAt: -1 });
-    },
+    // pins: async (parent, { pinClassification }) => {
+    //   const params = pinClassification ? { pinClassification } : {};
+    //   return Pin.find(params).sort({ createdAt: -1 });
+    // },
     pin: async (parent, { pinId }) => {
       return Pin.findOne({ _id: pinId });
     },
