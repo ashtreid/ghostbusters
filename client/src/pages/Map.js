@@ -1,7 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
+// Icon definitions 1-3
+const classI = new L.Icon({
+    iconUrl: 'i hate paths',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+});
+
+const classII = new L.Icon({
+    iconUrl: 'heck',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+});
+
+const classIII = new L.Icon({
+    iconUrl: 'placeholder',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+});
+
+// Add more icons once functionality works
 
 
 const Map = () => {
