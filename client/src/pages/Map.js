@@ -1,29 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
+// Import custom icons
+import classI from '../customIcons/classI.png';
+import classII from '../customIcons/classII.png';
+import classIII from '../customIcons/classIII.png';
+import bustin from '../customIcons/bustin.png';
+
 // Icon definitions 1-3
-const classI = new L.Icon({
-    iconUrl: 'i hate paths',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
+//resource: https://leafletjs.com/examples/custom-icons/
+const classIPin = new L.Icon({
+    iconUrl: classI,
+    iconSize: [41, 41],
+    iconAnchor: [0, 41],
 });
 
-const classII = new L.Icon({
-    iconUrl: 'heck',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
+const classIIPin = new L.Icon({
+    iconUrl: classII,
+    iconSize: [41, 41],
+    iconAnchor: [20, 41],
 });
 
-const classIII = new L.Icon({
-    iconUrl: 'placeholder',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
+const classIIIPin = new L.Icon({
+    iconUrl: classIII,
+    iconSize: [60, 60],
+    iconAnchor: [20, 42],
+});
+
+const ghostBustin = new L.Icon({
+    iconUrl: bustin,
+    iconSize: [60, 50],
+    iconAnchor: [20, 42],
 });
 
 // Add more icons once functionality works
-
 
 const Map = () => {
     const [userLocation, setUserLocation] = useState(null);
@@ -34,9 +46,12 @@ const Map = () => {
     const handleMapClick = (event) => {
         // Extract the latitude and longitude from the 'event' object's 'latlng' property.
         const { lat, lng } = event.latlng;
+        console.log(lat, lng);
         // add a new object representing the clicked location to the existing 'pins' array.
         setPins([...pins, { lat, lng }]);
     };    
+
+    console.log("Map component mounted.");
 
     useEffect(() => {
         // Function to fetch user's location using the geolocation API
@@ -66,8 +81,10 @@ const Map = () => {
             <MapContainer center={userLocation || [40.7196, -74.0066]} zoom={12} scrollWheelZoom={false} onClick={handleMapClick}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                />
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'     /> 
+                    <Marker position={[40.7196, -74.0066]} 
+            icon={ghostBustin}>
+            </Marker>
             </MapContainer>
         </>
 
