@@ -70,11 +70,16 @@ function Map() {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+             {data.map((coords, index) => (
+                    <Marker key={index} position={coords} icon={classIIIPin}>
+                        <Popup>
+                            Marker at {coords[0]}, {coords[1]}
+                        </Popup>
+                    </Marker>
+            ))}
+
         <MyComponent saveMarkers={saveMarkers} />
-        
-        <Marker position={[40.7196, -74.0066]} 
-            icon={ghostBustin}>
-            </Marker>
+        <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
       </MapContainer>
     </div>
   );
