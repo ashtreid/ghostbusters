@@ -2,6 +2,9 @@ const db = require('../config/connection');
 
 const { User } = require('../models');
 const { Pin } = require('../models');
+
+const bcrypt = require('bcrypt');
+
 // TODO: Delete this later:
 // const { Comment } = require('../models');
 
@@ -19,7 +22,7 @@ db.once('open', async () => {
     // await Comment.deleteMany({});
 
     // seed Users and Pins (with comments)
-    const createdUsers = await User.insertMany(userSeeds);
+    await User.create(userSeeds);
     const createdPins = await Pin.insertMany(pinSeeds);
     // const createdComments = await Comment.insertMany(commentSeeds)
 
