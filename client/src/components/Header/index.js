@@ -4,11 +4,14 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm'
 
-// import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 
 const Header = () => {
-  // set modal display state
   const [showModal, setShowModal] = useState(false);
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   return (
     <>
@@ -17,30 +20,25 @@ const Header = () => {
           <Navbar.Brand as={Link} to='/'>
             Ghostbusters
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
-            <Nav className='ml-auto d-flex'>
-            <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-              <Nav.Link as={Link} to='/paranormal'>
-                Ghost Sightings
-              </Nav.Link>
-             
-
-              {/* if user is logged in show saved books and logout */}
-              {/* {Auth.loggedIn() ? (
-                <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See Your Books
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                </>
-              ) : (
+            {Auth.loggedIn() ? (
+              <Nav className='ml-auto d-flex'>
+                <Nav.Link as={Link} to='/paranormal'>
+                  Ghost Sightings
+                </Nav.Link>
+                <Nav.Link onClick={logout} as={Link} to='/'>Logout</Nav.Link>
+              </Nav>
+            ) : (
+              <Nav className='ml-auto d-flex'>
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-              )} */}
-            </Nav>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
       {/* set modal data up */}
       <Modal
         size='lg'
@@ -78,34 +76,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-// import React, { useState } from 'react';
-// import LoginForm from '../LoginForm';
-// import SignupForm from '../Signup'
-
-// const Header = () => {
-//     const [showModal, setShowModal] = useState(false);
-
-//     const handleModalOpen = () => {
-//         setShowModal(true);
-//     };
-
-//     const handleModalClose = () => {
-//         setShowModal(false);
-//     };
-
-//     return (
-//         <header>
-//             <h1>Ghostbusters!!</h1>
-//             <button onClick={handleModalOpen}>Login</button>
-//             <LoginForm show={showModal} onClose={handleModalClose} />
-
-//             <button onClick={handleModalOpen}>Signup</button>
-//             <SignupForm show={showModal} onClose={handleModalClose} />
-//         </header>
-//     );
-// };
-
-// export default Header;
