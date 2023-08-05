@@ -1,7 +1,7 @@
 # Ghostbusters ![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 
 ## Description 
-***[Ghostbusters Website](https://sitename.herokuapp.com/)*** - an interactive and responsive, single-page, MERN stack application. 
+Welcome to the [**Ghostbusters Website**](https://sitename.herokuapp.com/) - an interactive and responsive single-page MERN stack application. 
 
 This site offers users a place to find information about the Ghostbusters, learn about the services they offer, and contact the team directly. Additionally, users can also view the paranormal map to see where spooky activity has been reported in their vicitiny. If users have had their own paranormal experiences they'd like to report, they can register an account or login, allowing them to comment on existing sightings and drop pins of their own to share stories about their interactions with the strange, unusual, and spooky.
 
@@ -26,7 +26,7 @@ This site offers users a place to find information about the Ghostbusters, learn
 N/A
 
 ## Usage 
-1. Head to the ***[Ghostbusters Website](https://sitename.herokuapp.com/)***. 
+1. Click here to navigate to the *[Ghostbusters Website](https://sitename.herokuapp.com/)*. 
 2. Meet the Ghostbusters team and view the services they offer - when you're ready to book a service, give them a call or send them an email!
 3. Click the paranormal map to view where spooky activity has been reported in your area.
 4. Register an account or login to comment on other users' pins or to drop pins of your own! 
@@ -34,10 +34,10 @@ N/A
 
 ## Credits 
 A big thank you to the Ghostbusters team, without whom this project would not have been possible:
-* [Ash](https://github.com/ashtreid)
-* [Parker](https://github.com/pbodybrooks)
-* [Rayne](https://github.com/Childofrainydays)
-* [Todd](https://github.com/AegeanGrey)
+* [Ash Reid](https://github.com/ashtreid)
+* [Parker Brook](https://github.com/pbodybrooks)
+* [Rayne Burk](https://github.com/Childofrainydays)
+* [Todd Dharni](https://github.com/AegeanGrey)
 
 ## License
 This application is covered under the [MIT](https://opensource.org/licenses/MIT) license.
