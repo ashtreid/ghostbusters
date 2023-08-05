@@ -13,11 +13,6 @@ const resolvers = {
     pins: async () => {
       return Pin.find().populate('pins');
     },
-    // TODO: Delete this query for pins by username if it is not needed
-    // pinsByUsername: async (parent, { username }) => {
-    //   const params = username ? { username } : {};
-    //   return Pin.find(params).sort({ createdAt: -1 });
-    // },
     pinsByClassification: async (parent, { pinClassification }) => {
       const params = pinClassification ? { pinClassification } : {};
       return Pin.find(params).sort({ createdAt: -1 });
@@ -25,7 +20,6 @@ const resolvers = {
     pin: async (parent, { pinId }) => {
       return Pin.findOne({ _id: pinId });
     },
-    // TODO: Ensure we are storing user context (particularly _id) correctly in the JWT. This is essential for pins and comments to show the author
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('pins');
