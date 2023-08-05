@@ -37,7 +37,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     pins: [Pin]
-    # pins(pinClassification: String): [Pin]
+    pinsByClassification(pinClassification: String!): [Pin]
     pin(pinId: ID!): Pin
     me: User
   }
