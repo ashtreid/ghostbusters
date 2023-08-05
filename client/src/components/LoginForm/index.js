@@ -1,6 +1,5 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
@@ -9,9 +8,7 @@ import Auth from '../../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  // const [validated] = useState(false);
   const [login, { error, data }] = useMutation(LOGIN_USER)
-//   const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +21,7 @@ const LoginForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(userFormData);
+    console.log("Login form data:", userFormData);
 
     try {
       const { data } = await login({
@@ -46,8 +43,9 @@ const LoginForm = () => {
     <>
       {data ? (
         <p> 
-          Success! You may now head{' '}
-          <Link to='/'>back to the homepage.</Link>
+          Success! Let's bust some ghosts!
+          {/* Success! You may now head{' '}
+          <Link to='/'>back to the homepage.</Link> */}
         </p>
       ) : (
       <Form onSubmit={handleFormSubmit}>
@@ -95,64 +93,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-
-// import React, { useState } from 'react';
-
-// const LoginForm = ({ show, onClose }) => {
-//     const [formData, setFormData] = useState({
-//         name: '',
-//         email: '',
-//     })
-
-//     const handleInputChange = (event) => {
-//         const { name, value } = event.target;
-//         setFormData({ ...formData, [name]: value })
-//     };
-
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-//         console.log(formData);
-//         onClose();
-//     }
-
-//     if (!show) {
-//         return null;
-//     }
-
-//     return (
-//         <div className="modal">
-//             <div className="modal-content">
-//                 <span className="close" onClick={onClose}>
-//                     &times;
-//                 </span>
-//                 <h2>Login</h2>
-//                 <form onSubmit={handleSubmit}>
-//                     <div className="form-group">
-//                         <label>Name</label>
-//                         <input
-//                             type="text"
-//                             name="name"
-//                             value={formData.name}
-//                             onChange={handleInputChange}
-//                             required
-//                         />
-//                     </div>
-//                     <div className="form-group">
-//                         <label>Email</label>
-//                         <input
-//                             type="email"
-//                             name="email"
-//                             value={formData.email}
-//                             onChange={handleInputChange}
-//                             required
-//                         />
-//                     </div>
-//                     <button type="submit">Submit</button>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default LoginForm;
