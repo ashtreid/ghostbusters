@@ -1,29 +1,42 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
+
+import Auth from '../../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [validated] = useState(false);
+  // const [validated] = useState(false);
+  const [login, { error, data }] = useMutation(LOGIN_USER)
 //   const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    
+    setUserFormData({ 
+      ...userFormData, 
+      [name]: value, 
+    });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(userFormData);
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    try {
+      const { data } = await login({
+        variables: { ...userFormData }
+      });
+
+      Auth.login(data.login.token);
+    } catch (event) {
+      console.error(event);
     }
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
     });
@@ -31,7 +44,13 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      {data ? (
+        <p> 
+          Success! You may now head{' '}
+          <Link to='/'>back to the homepage.</Link>
+        </p>
+      ) : (
+      <Form onSubmit={handleFormSubmit}>
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
@@ -64,6 +83,13 @@ const LoginForm = () => {
           Submit
         </Button>
       </Form>
+      )}
+
+      {error && (
+        <div className='my-3 p-3 bg-danger text-white'>
+          {error.message}
+        </div>
+      )}
     </>
   );
 };
