@@ -10,6 +10,7 @@ import classII from '../customIcons/classII.png';
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
 
+
 // Icon definitions 1-3
 //resource: https://leafletjs.com/examples/custom-icons/
 const classIPin = new L.Icon({
@@ -29,6 +30,7 @@ const classIIIPin = new L.Icon({
     iconSize: [60, 60],
     iconAnchor: [20, 42],
 });
+
 
 const ghostBustin = new L.Icon({
     iconUrl: bustin,
