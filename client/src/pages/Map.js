@@ -57,16 +57,39 @@ function MyComponent({ saveMarkers }) {
 function Map() {
 
   const [data, setData] = useState([]);
+  const [userLocation, setUserLocation] = useState(null);
 
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation([latitude, longitude]);
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported.');
+    }
+  };
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
+  
   const saveMarkers = (newMarkerCoords) => {
     setData((prevData) => [...prevData, newMarkerCoords]);
   };
+
+  const defaultCenter = [40.7196, -74.0066];
 
   return (
     <div>
       <MapContainer
         className="Map"
-        center={[40.7196, -74.0066]}
+        center={userLocation || defaultCenter}
         zoom={15}
         scrollWheelZoom={false}
         style={{ height: "100vh" }}
@@ -81,6 +104,7 @@ function Map() {
               Marker at {markerData.coords[0]}, {markerData.coords[1]}
               <br />
               Comment: {markerData.comment}
+              {/* more stuff! */}
             </Popup>
           </Marker>
         ))}
