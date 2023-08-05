@@ -13,14 +13,15 @@ const resolvers = {
     pins: async () => {
       return Pin.find().populate('pins');
     },
-    pins: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Pin.find(params).sort({ createdAt: -1 });
-    },
-    // pins: async (parent, { pinClassification }) => {
-    //   const params = pinClassification ? { pinClassification } : {};
+    // TODO: Delete this query for pins by username if it is not needed
+    // pinsByUsername: async (parent, { username }) => {
+    //   const params = username ? { username } : {};
     //   return Pin.find(params).sort({ createdAt: -1 });
     // },
+    pinsByClassification: async (parent, { pinClassification }) => {
+      const params = pinClassification ? { pinClassification } : {};
+      return Pin.find(params).sort({ createdAt: -1 });
+    },
     pin: async (parent, { pinId }) => {
       return Pin.findOne({ _id: pinId });
     },
