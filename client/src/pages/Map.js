@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -40,7 +40,7 @@ function MyComponent({ saveMarkers }) {
   const map = useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
-      L.marker([lat, lng], { icon: classIIIPin }).addTo(map);
+      const marker = L.marker([lat, lng], { icon: classIIIPin }).addTo(map);
       saveMarkers([lat, lng]);
     },
   });
@@ -69,6 +69,7 @@ function Map() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MyComponent saveMarkers={saveMarkers} />
+        
         <Marker position={[40.7196, -74.0066]} 
             icon={ghostBustin}>
             </Marker>
@@ -78,8 +79,6 @@ function Map() {
 }
 
 export default Map;
-
-// Add more icons once functionality works
 
 // const Map = () => {
 //     const [userLocation, setUserLocation] = useState(null);
