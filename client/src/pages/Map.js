@@ -39,14 +39,19 @@ const ghostBustin = new L.Icon({
 });
 
 function MyComponent({ saveMarkers }) {
-  const map = useMapEvents({
-    click: (e) => {
-      const { lat, lng } = e.latlng;
-      const marker = L.marker([lat, lng], { icon: classIIIPin }).addTo(map);
-      saveMarkers([lat, lng]);
-    },
-  });
-  return null;
+    const [markers, setMarkers] = useState([]);
+  
+    const map = useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng;
+        const comment = prompt("Enter a comment for this marker:");
+        const newMarker = { coords: [lat, lng], comment };
+        setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
+        saveMarkers(newMarker);
+      },
+    });
+  
+    return null;
 }
 
 function Map() {
@@ -70,15 +75,18 @@ function Map() {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-             {data.map((coords, index) => (
-                    <Marker key={index} position={coords} icon={classIIIPin}>
-                        <Popup>
-                            Marker at {coords[0]}, {coords[1]}
-                        </Popup>
-                    </Marker>
-            ))}
+        {data.map((markerData, index) => (
+          <Marker key={index} position={markerData.coords} icon={classIIIPin}>
+            <Popup>
+              Marker at {markerData.coords[0]}, {markerData.coords[1]}
+              <br />
+              Comment: {markerData.comment}
+            </Popup>
+          </Marker>
+        ))}
 
         <MyComponent saveMarkers={saveMarkers} />
+        {/* Ghostbusters HQ marker, Do not change */}
         <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
       </MapContainer>
     </div>
