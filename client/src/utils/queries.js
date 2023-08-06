@@ -63,8 +63,8 @@ export const QUERY_USER = gql`
 
 
 export const QUERY_PINS = gql`
-  query getPins {
-    pins {
+  query getPins($username: String) {
+    pins(username: $username) {
       _id
       pinLat
       pinLon
