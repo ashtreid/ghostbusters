@@ -1,11 +1,9 @@
-// Note: All code below was transferred from Module 22, Activity 18 - JWT Review
-
 const jwt = require('jsonwebtoken');
-
 const secret = 'mysecretssshhhhhhh';
 const expiration = '2h';
 
 module.exports = {
+  // authenticate the token for mutations 
   authMiddleware: function ({ req }) {
     let token = req.body.token || req.query.token || req.headers.authorization;
 
@@ -26,6 +24,7 @@ module.exports = {
 
     return req;
   },
+  // sign token with user data as payload, the secret, and expiration time
   signToken: function ({ email, username, _id }) {
     const payload = { email, username, _id };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });

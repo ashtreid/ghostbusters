@@ -27,6 +27,7 @@ const userSchema = new Schema({
   ]
 });
 
+// hash user password with 10 rounds of salting
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
@@ -36,6 +37,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// hash the entered password and confirm it matches the hashed password in the database (returns true or false)
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
