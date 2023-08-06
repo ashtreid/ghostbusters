@@ -10,9 +10,13 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('pins');
     },
-    pins: async () => {
-      return Pin.find().populate('pins');
+    pins: async (parent, { username }) => {
+      const params = username ? { pinAuthor: username } : {};
+      return Pin.find(params).populate('comments');
     },
+    // pins: async () => {
+    //   return Pin.find().populate('pins');
+    // },
     pinsByClassification: async (parent, { pinClassification }) => {
       const params = pinClassification ? { pinClassification } : {};
       return Pin.find(params).sort({ createdAt: -1 });
@@ -51,14 +55,14 @@ const resolvers = {
 
       return { token, user };
     },
-    addPin: async (parent, { pinLat, pinLon, pinClassification, pinTitle, pinText }, context) => {
+    addPin: async (parent, { pinLat, pinLon, pinTitle }, context) => {
       if (context.user) {
         const pin = await Pin.create({
           pinLat,
           pinLon,
-          pinClassification,
+          // pinClassification,
           pinTitle,
-          pinText,
+          // pinText,
           pinAuthor: context.user.username,
         });
 
@@ -71,6 +75,26 @@ const resolvers = {
       }
       throw new AuthenticationError('You must log in to add a new pin!');
     },
+    // addPin: async (parent, { pinLat, pinLon, pinClassification, pinTitle, pinText }, context) => {
+    //   if (context.user) {
+    //     const pin = await Pin.create({
+    //       pinLat,
+    //       pinLon,
+    //       pinClassification,
+    //       pinTitle,
+    //       pinText,
+    //       pinAuthor: context.user.username,
+    //     });
+
+    //     await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $addToSet: { pins: pin._id } }
+    //     );
+
+    //     return pin;
+    //   }
+    //   throw new AuthenticationError('You must log in to add a new pin!');
+    // },
     removePin: async (parent, { pinId }, context) => {
       if (context.user) {
         const pin = await Pin.findOneAndDelete({

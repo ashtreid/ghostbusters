@@ -30,13 +30,33 @@ export const QUERY_USER = gql`
   }
 `;
 
+// export const QUERY_PINS = gql`
+// query getPins {
+//   users {
+//     pins {
+//       _id
+//       pinText
+//       pinAuthor
+//       createdAt
+//     }
+//   }
+// }
+// `;
+
 export const QUERY_PINS = gql`
-  query getPins {
-    pins {
+  query getPins($username: String) {
+    pins(username: $username) {
       _id
-      pinText
+      pinLat
+      pinLon
+      pinTitle
       pinAuthor
       createdAt
+      comments {
+        _id
+        commentText
+        commentAuthor
+      }
     }
   }
 `;
