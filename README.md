@@ -20,7 +20,7 @@ This site offers users a place to find information about the Ghostbusters, learn
 ![Screenshot of Ghostbusters Homepage.](path/to/screenshot.png)
 
 ## Presentation
-[Ghostbusters Presentation Slides]()
+[Ghostbusters Presentation Slides](https://www.canva.com/design/DAFqt6H2ItQ/oVN0nX8C9cfOR05JyVnsrQ/edit)
 
 ## Installation 
 N/A

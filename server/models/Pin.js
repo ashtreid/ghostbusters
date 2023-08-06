@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const Comment = require('./Comment');
 const dateFormat = require('../utils/dateFormat');
 
-// Spectral Classifications
+// Spectral Classifications (type of paranormal sighting)
 const allowedClassifications = [
   "Class I",
   "Class II",
@@ -64,7 +64,7 @@ const pinSchema = new Schema({
   id: false,
 });
 
-// virtual for comment count
+// virtual for comment count on pins
 pinSchema.virtual('commentCount').get(function () {
   return this.comments.length;
 });
