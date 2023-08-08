@@ -3,8 +3,6 @@ const db = require('../config/connection');
 const { User } = require('../models');
 const { Pin } = require('../models');
 
-const bcrypt = require('bcrypt');
-
 // TODO: Delete this later:
 // const { Comment } = require('../models');
 

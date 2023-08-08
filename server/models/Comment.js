@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
+// comment schema is exported and utilized as a subdocument of the pin schema
 const commentSchema = new Schema({
-    // TODO: (delete this if not needed?) ref to the pinId this comment belongs to
     commentText: {
         type: String,
         required: true,

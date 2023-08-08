@@ -13,5 +13,60 @@
     "username": "Michelle from Band Camp",
     "email": "michelle@flutefun.net",
     "password": "password123"
+  },
+  {
+    "username": "GhostFan",
+    "email": "ghostfan@gmail.com",
+    "password": "password123"
+  },
+  {
+    "username": "SpecterChaser",
+    "email": "specter@chasers.com",
+    "password": "password123"
+  },
+  {
+    "username": "ParanormalPeep",
+    "email": "paranormal@peep.com",
+    "password": "password123"
+  },
+  {
+    "username": "EctoEnthusiast",
+    "email": "ecto@enthusiast.com",
+    "password": "password123"
+  },
+  {
+    "username": "SpookSleuth",
+    "email": "sleuth@spookspotter.com",
+    "password": "password123"
+  },
+  {
+    "username": "PhantomFinder",
+    "email": "phantom@finder.com",
+    "password": "password123"
+  },
+  {
+    "username": "susanSmiles",
+    "email": "susan@gmail.com",
+    "password": "password123"
+  },
+  {
+    "username": "ghostRider90",
+    "email": "ghost@email.com",
+    "password": "password123"
+  },
+  {
+    "username": "hollywoodHauntings",
+    "email": "hollywood@hills.com",
+    "password": "password123"
+  },
+  {
+    "username": "sleeplessInMiami",
+    "email": "floridaman@wtf.com",
+    "password": "password123"
+  },
+  {
+    "username": "ApparitionAppreciator",
+    "email": "appreciator@apparitions.com",
+    "password": "password123"
   }
 ]
