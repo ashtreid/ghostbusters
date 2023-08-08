@@ -105,6 +105,7 @@ export const QUERY_ME = gql`
       email
       pins {
         _id
+        pinTitle
         pinText
         pinAuthor
         createdAt

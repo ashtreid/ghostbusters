@@ -37,7 +37,7 @@ function OffCanvas() {
               {user.pins.map((pin) => (
                 <Card key={pin._id} className="my-2">
                   <Card.Body>
-                    <Card.Title>{pin.pinText}</Card.Title>
+                    <Card.Title>Title: {pin.pinTitle}</Card.Title>
                     <Card.Text>Author: {pin.pinAuthor}</Card.Text>
                     <Card.Text>Created At: {pin.createdAt}</Card.Text>
                   </Card.Body>
