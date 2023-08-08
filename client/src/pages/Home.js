@@ -1,4 +1,5 @@
 import React from 'react';
+import OffCanvas from '../components/OffCanvas';
 
 // import { useQuery } from '@apollo/client';
 
@@ -13,6 +14,7 @@ const Home = () => {
 
   return (
     <main>
+      < OffCanvas />
       <div className="flex-row justify-center">
         <div
           className="col-12 col-md-10 mb-3 p-3"
