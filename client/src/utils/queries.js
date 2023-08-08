@@ -109,6 +109,12 @@ export const QUERY_ME = gql`
         pinText
         pinAuthor
         createdAt
+        comments {
+          _id
+          commentText
+          commentAuthor
+          createdAt
+        }
       }
     }
   }
