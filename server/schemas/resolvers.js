@@ -20,6 +20,7 @@ const resolvers = {
     // pins: async () => {
     //   return Pin.find().populate('pins');
     // },
+    
     // query a single pin by classification
     pinsByClassification: async (parent, { pinClassification }) => {
       const params = pinClassification ? { pinClassification } : {};
