@@ -12,6 +12,19 @@
   height: 100vh;
 }
 
+.ad {
+  padding-top: 60px;
+}
+
+.video-responsive {
+  overflow: hidden;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
