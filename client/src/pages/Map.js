@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -10,7 +10,6 @@ import bustin from '../customIcons/bustin.png';
 
 import { ADD_PIN } from '../utils/mutations';
 import { QUERY_PINS } from '../utils/queries';
-import { printSchema } from 'graphql';
 
 const classIIIPin = L.icon({
     iconUrl: classIII,
@@ -42,7 +41,7 @@ function MapMarkers({ saveMarkers }) {
 function Map() {
     const [pins, setPins] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
-    const { loading, error, data } = useQuery(QUERY_PINS);
+    const { loading, data } = useQuery(QUERY_PINS);
     const [addPin] = useMutation(ADD_PIN);
 
     useEffect(() => {
