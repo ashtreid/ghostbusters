@@ -17,23 +17,23 @@ const pinSchema = new Schema({
   pinLat: {
     type: Number,
     required: true,
-    min: -90,
-    max: 90,
+    // min: -90,
+    // max: 90,
   },
   pinLon: {
     type: Number,
     required: true,
-    min: -180,
-    max: 180,
+    // min: -180,
+    // max: 180,
   },
   pinClassification: {
     type: String,
-    required: true,
+    // required: true,
     enum: allowedClassifications,
   },
   pinTitle: {
     type: String,
-    required: 'You need to leave a title!',
+    // required: 'You need to leave a title!',
     minlength: 1,
     maxlength: 280,
     trim: true,
@@ -46,7 +46,7 @@ const pinSchema = new Schema({
   },
   pinAuthor: {
     type: String,
-    required: true,
+    // required: true,
     trim: true,
   },
   createdAt: {
