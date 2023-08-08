@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, Stack, Carousel, Image, Figure, Anchor } from 'react-bootstrap';
-import telephone from '../images/telephone.gif';
-import people from '../images/people.png';
-import paranoid from '../images/paranoid.png';
-import basement from '../images/basement.png';
+import telephone from '../customIcons/telephone.gif';
+import people from '../customIcons/people.png';
+import paranoid from '../customIcons/paranoid.png';
+import basement from '../customIcons/basement.png';
 
 // import { useQuery } from '@apollo/client';
 
