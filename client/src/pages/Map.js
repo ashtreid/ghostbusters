@@ -52,17 +52,6 @@ function Map() {
         }
     }, [data, loading]);
 
-    // const fetchPinsFromDatabase = async (pinsData) => {
-    //     try {
-    //         if (pinsData) {
-    //             setPins(pinsData.pins);
-    //             console.log("SET PINS", pinsData.pins);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error fetching pins:', error);
-    //     }
-    // };
-
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -80,9 +69,7 @@ function Map() {
             setUserLocation([40.7196, -74.0066]); // Set default location
         }
 
-        // fetchPinsFromDatabase(data);
-        // console.log("data for fetching:", data);
-        // console.log("fetch pins:", fetchPinsFromDatabase(data));
+
     }, []);
 
     const saveMarkers = async (newMarker) => {
