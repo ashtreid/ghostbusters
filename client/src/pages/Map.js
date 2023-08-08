@@ -1,36 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-import { ADD_PIN } from '../utils/mutations';
-import { QUERY_PINS } from '../utils/queries';
 
-// Import custom icons
-// import classI from '../customIcons/classI.png';
-// import classII from '../customIcons/classII.png';
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
 
 import { ADD_PIN } from '../utils/mutations';
 import { QUERY_PINS } from '../utils/queries';
 
-// Icon definitions 1-3
-//resource: https://leafletjs.com/examples/custom-icons/
-// const classIPin = new L.Icon({
-//     iconUrl: classI,
-//     iconSize: [41, 41],
-//     iconAnchor: [0, 41],
-// });
-
-// const classIIPin = new L.Icon({
-//     iconUrl: classII,
-//     iconSize: [41, 41],
-//     iconAnchor: [20, 41],
-// });
-
-const classIIIPin = new L.Icon({
+const classIIIPin = L.icon({
     iconUrl: classIII,
     iconSize: [60, 60],
     iconAnchor: [20, 42],
