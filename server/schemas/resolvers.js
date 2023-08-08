@@ -12,10 +12,16 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('pins');
     },
+    
     // query all pins
-    pins: async () => {
-      return Pin.find().populate('pins');
+    pins: async (parent, { username }) => {
+      const params = username ? { pinAuthor: username } : {};
+      return Pin.find(params).populate('comments');
     },
+    // pins: async () => {
+    //   return Pin.find().populate('pins');
+    // },
+    
     // query a single pin by classification
     pinsByClassification: async (parent, { pinClassification }) => {
       const params = pinClassification ? { pinClassification } : {};
@@ -65,9 +71,9 @@ const resolvers = {
         const pin = await Pin.create({
           pinLat,
           pinLon,
-          pinClassification,
+          // pinClassification,
           pinTitle,
-          pinText,
+          // pinText,
           pinAuthor: context.user.username,
         });
 
@@ -80,6 +86,26 @@ const resolvers = {
       }
       throw new AuthenticationError('You must log in to add a new pin!');
     },
+    // addPin: async (parent, { pinLat, pinLon, pinClassification, pinTitle, pinText }, context) => {
+    //   if (context.user) {
+    //     const pin = await Pin.create({
+    //       pinLat,
+    //       pinLon,
+    //       pinClassification,
+    //       pinTitle,
+    //       pinText,
+    //       pinAuthor: context.user.username,
+    //     });
+
+    //     await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $addToSet: { pins: pin._id } }
+    //     );
+
+    //     return pin;
+    //   }
+    //   throw new AuthenticationError('You must log in to add a new pin!');
+    // },
     removePin: async (parent, { pinId }, context) => {
       if (context.user) {
         const pin = await Pin.findOneAndDelete({
