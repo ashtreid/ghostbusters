@@ -12,6 +12,7 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('pins');
     },
+    
     // query all pins
     pins: async (parent, { username }) => {
       const params = username ? { pinAuthor: username } : {};
