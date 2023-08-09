@@ -76,7 +76,7 @@ function MapMarkers({ saveMarkers }) {
 }
 
 function Map() {
-
+    const [commentsVisible, setCommentsVisible] = useState({});
     const [pins, setPins] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const { loading, data } = useQuery(QUERY_PINS);
@@ -109,24 +109,9 @@ function Map() {
 
     }, []);
 
-    // const saveMarkers = async (newMarker) => {
-    //     try {
-    //         const { data } = await addPin({
-    //             variables: {
-    //                 pinLat: newMarker.coords[0],
-    //                 pinLon: newMarker.coords[1],
-    //                 pinTitle: newMarker.title,
-    //             },
-    //         });
-    //         console.log('Response Data:', data);
-    //         setPins((prevPins) => [...prevPins, newMarker]);
-    //     } catch (error) {
-    //         console.error('Error saving pin:', error);
-    //     }
-    // };
-
     const saveMarkers = async (formValues) => {
         try {
+            console.log("formValues:", formValues);
             const { data } = await addPin({
                 variables: {
                     pinLat: formValues.lat,
@@ -135,6 +120,7 @@ function Map() {
                     pinText: formValues.description,
                 },
             });
+            console.log('pinText:', formValues.description)
             console.log('Response Data:', data);
             setPins((prevPins) => [...prevPins, formValues]);
         } catch (error) {
@@ -192,7 +178,7 @@ function Map() {
                                                 <Card.Body>
                                                     <Card.Title>{pin.pinTitle}</Card.Title>
                                                     <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
-                                                    <Card.Text>{pin.pinText}{pin.pinDescription}</Card.Text>
+                                                    <Card.Text>{pin.pinText}</Card.Text>
                                                     <Card.Footer>By {pin.pinAuthor}</Card.Footer>
 
                                                     
@@ -211,6 +197,35 @@ function Map() {
                 <p>Loading Map</p>
             )}
         </div>
+    );
+}
+
+function CommentsComponent({ comments }) {
+    if (!comments || comments.length === 0) {
+      return (
+        <div>
+          <hr />
+          <Card className="my-2">
+            <Card.Body>
+              <Card.Text>This pin doesn't have any comments yet.</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      );
+    }
+  
+    return (
+      <div>
+        <hr />
+        {comments.map((comment) => (
+          <Card key={comment._id} className="my-2">
+            <Card.Body>
+              <Card.Title>{comment.commentText}</Card.Title>
+              <Card.Text>{comment.commentAuthor}  ·  {comment.createdAt}</Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     );
 }
 

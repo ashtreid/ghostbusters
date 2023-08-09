@@ -69,6 +69,7 @@ export const QUERY_PINS = gql`
       pinLat
       pinLon
       pinTitle
+      pinText
       pinAuthor
       createdAt
       comments {

@@ -22,8 +22,6 @@ function FormModal({ openForm, onClose, onSubmit, formValues, setFormValues, pos
                 position: 'absolute',
                 top: `${position.y - 90}px`, 
                 left: `${position.x + 30}px`,
-                // top: `${position.y}px`, 
-                // left: `${position.x}px`,
             }}
             onClick={(e) => {
                 e.stopPropagation(); 
