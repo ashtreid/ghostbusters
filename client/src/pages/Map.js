@@ -202,6 +202,7 @@ function Map() {
                                         Marker at {pin.pinLon}, {pin.pinLat}
                                         <br />
                                         Pin Title {pin.pinTitle}
+<<<<<<< HEAD
                                         <br />
                                         <form class="popup-form">
                                             <div class="form-group">
@@ -214,6 +215,8 @@ function Map() {
                                             </div>
                                         </form>
                                         
+=======
+>>>>>>> 899c2e5 (pins are being successfully added)
                                         <RemovePin pinId={pin._id} onDelete={refetch}/>
                                         <br />
                                         <form class="popup-form">
