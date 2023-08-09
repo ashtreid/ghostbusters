@@ -31,6 +31,7 @@ function MapMarkers({ saveMarkers }) {
         description: '',
     });
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
+    const [clickCoordinates, setClickCoordinates] = useState({ lat: 0, lng: 0 });
 
     //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
     const handleFormSubmit = (values) => {
@@ -45,10 +46,13 @@ function MapMarkers({ saveMarkers }) {
                 setFormValues({
                     title: '',
                     description: '',
+                    lat: lat,
+                    lng: lng,
                 });
                 setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY }); 
-                // setClickPosition({ x: lat, y: lng });
+                setClickCoordinates({ lat, lng });
                 setOpenForm(true);
+                console.log("click coords:", clickCoordinates)
             }
         },
     });
@@ -94,6 +98,7 @@ function MapMarkers({ saveMarkers }) {
                     formValues={formValues}
                     setFormValues={setFormValues}
                     position={clickPosition} 
+                    coordinates={clickCoordinates}
                 />
             )}
         </>
@@ -135,21 +140,39 @@ function Map() {
 
     }, []);
 
-    const saveMarkers = async (newMarker) => {
+    // const saveMarkers = async (newMarker) => {
+    //     try {
+    //         const { data } = await addPin({
+    //             variables: {
+    //                 pinLat: newMarker.coords[0],
+    //                 pinLon: newMarker.coords[1],
+    //                 pinTitle: newMarker.title,
+    //             },
+    //         });
+    //         console.log('Response Data:', data);
+    //         setPins((prevPins) => [...prevPins, newMarker]);
+    //     } catch (error) {
+    //         console.error('Error saving pin:', error);
+    //     }
+    // };
+
+    const saveMarkers = async (formValues) => {
         try {
             const { data } = await addPin({
                 variables: {
-                    pinLat: newMarker.coords[0],
-                    pinLon: newMarker.coords[1],
-                    pinTitle: newMarker.title,
+                    pinLat: formValues.lat,
+                    pinLon: formValues.lng,
+                    pinTitle: formValues.title,
+                    pinText: formValues.description,
                 },
             });
             console.log('Response Data:', data);
-            setPins((prevPins) => [...prevPins, newMarker]);
+            setPins((prevPins) => [...prevPins, formValues]);
         } catch (error) {
             console.error('Error saving pin:', error);
         }
     };
+    
 
     const defaultCenter = [40.7196, -74.0066];
 
@@ -175,7 +198,7 @@ function Map() {
                                     <Popup>
                                         Marker at {pin.pinLon}, {pin.pinLat}
                                         <br />
-                                        Comment: {pin.pinTitle}
+                                        Pin Title {pin.pinTitle}
                                         <br />
                                         <form class="popup-form">
                                             <div class="form-group">

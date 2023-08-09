@@ -1,6 +1,6 @@
 import React from "react";
 
-function FormModal({ openForm, onClose, onSubmit, formValues, setFormValues, position }) {
+function FormModal({ openForm, onClose, onSubmit, formValues, setFormValues, position, coordinates }) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormValues((prevValues) => ({
@@ -62,12 +62,17 @@ function FormModal({ openForm, onClose, onSubmit, formValues, setFormValues, pos
                                 />
                             </div>
                         </div>
+                        <div className="mb-3">
+                            <input type="hidden" name="lat" value={coordinates.lat} />
+                            <input type="hidden" name="lng" value={coordinates.lng} />
+                            <p><strong>Latitude:</strong> {coordinates.lat}</p>
+                            <p><strong>Longitude:</strong> {coordinates.lng}</p>
+                        </div>
                         <button className="button is-primary" type="submit">Save Marker</button>
                         <button className="button" type="button" onClick={onClose}>Cancel</button>
                     </form>
                 </section>
             </div>
-            <button className="modal-close is-large" aria-label="close" onClick={onClose}></button> 
         </div>
     );
     
