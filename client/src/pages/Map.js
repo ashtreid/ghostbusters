@@ -25,6 +25,44 @@ const ghostBustin = L.icon({
     iconAnchor: [20, 42],
 });
 
+// function MapMarkers({ saveMarkers }) {
+//     const [openForm, setOpenForm] = useState(false);
+//     const [formValues, setFormValues] = useState({
+//         title: '',
+//         description: '',
+//     });
+
+//     const handleFormSubmit = (values) => {
+//         saveMarkers(values);
+//         setOpenForm(false); // Close the form after submission
+//     };
+
+//     useMapEvents({
+//         click: (e) => {
+//             const { lat, lng } = e.latlng;
+//             setFormValues({
+//                 title: '',
+//                 description: '',
+//             });
+//             setOpenForm(true);
+//         },
+//     });
+
+//     return (
+//         <>
+//             {openForm && (
+//                 <FormModal
+//                     openForm={openForm}
+//                     onClose={() => setOpenForm(false)}
+//                     onSubmit={handleFormSubmit}
+//                     formValues={formValues}
+//                     setFormValues={setFormValues}
+//                 />
+//             )}
+//         </>
+//     );
+// }
+
 function MapMarkers({ saveMarkers }) {
     const [openForm, setOpenForm] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -183,6 +221,17 @@ function Map() {
                                         </form>
                                         
                                         <RemovePin pinId={pin._id} onDelete={refetch}/>
+                                        <br />
+                                        <form class="popup-form">
+                                            <div class="form-group">
+                                                <label class="mb-0" for="comment">Comment:</label>
+                                                <textarea class="form-control comment" rows="4"></textarea>
+                                            </div>
+                                            <div class="d-flex">
+                                                <button type="submit" class="btn">Save</button>
+                                                <button class="delete-button">Delete</button>
+                                            </div>
+                                        </form>
                                     </Popup>
                                 </Marker>
                             ) : null
