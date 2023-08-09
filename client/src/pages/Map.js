@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import OffCanvas from '../components/OffCanvas';
 
 
 import classIII from '../customIcons/classIII.png';
@@ -91,6 +92,7 @@ function Map() {
 
     return (
         <div>
+            <OffCanvas />
             {userLocation ? (
                 <MapContainer
                     className="Map"
