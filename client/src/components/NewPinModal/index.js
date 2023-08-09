@@ -65,8 +65,8 @@ function FormModal({ openForm, onClose, onSubmit, formValues, setFormValues, pos
                         <div className="mb-3">
                             <input type="hidden" name="lat" value={coordinates.lat} />
                             <input type="hidden" name="lng" value={coordinates.lng} />
-                            <p><strong>Latitude:</strong> {coordinates.lat}</p>
-                            <p><strong>Longitude:</strong> {coordinates.lng}</p>
+                            <p><strong>Latitude:</strong> {coordinates.lat.toFixed(4)}</p>
+                            <p><strong>Longitude:</strong> {coordinates.lng.toFixed(4)}</p>
                         </div>
                         <button className="button is-primary" type="submit">Save Marker</button>
                         <button className="button" type="button" onClick={onClose}>Cancel</button>
