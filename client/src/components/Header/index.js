@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Tab, Button } from 'react-bootstrap';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm'
 
@@ -28,11 +28,14 @@ const Header = () => {
                 <Nav.Link as={Link} to='/paranormal'>
                   Ghost Sightings
                 </Nav.Link>
-                <Nav.Link onClick={logout} as={Link} to='/'>Logout</Nav.Link>
+                <Button variant='danger' onClick={logout}>Logout</Button>
               </Nav>
             ) : (
               <Nav className='ml-auto d-flex'>
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link as={Link} to='/paranormal'>
+                  Ghost Sightings
+                </Nav.Link>
+                <Button onClick={() => setShowModal(true)}>Login/Sign Up</Button>
               </Nav>
             )}
           </Navbar.Collapse>
