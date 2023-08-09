@@ -21,8 +21,6 @@ function OffCanvas() {
   if (error) return <p>Error: {error.message}</p>;
 
   const user = data.me;
-  console.log("comments", user.pins[0].comments)
-  console.log("comments", user.username)
 
   const toggleComments = (pinId) => {
     setCommentsVisible((prev) => ({ ...prev, [pinId]: !prev[pinId] }));
@@ -61,7 +59,7 @@ function OffCanvas() {
               ))}
             </div>
           ) : (
-            <p>No pins found.</p>
+            <p>You haven't dropped any pins!</p>
           )}
         </Offcanvas.Body>
       </Offcanvas>
