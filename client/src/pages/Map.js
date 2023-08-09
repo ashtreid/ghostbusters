@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import OffCanvas from '../components/OffCanvas';
 import FormModal from '../components/NewPinModal';
+import RemovePin from '../components/RemovePins';
 
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
@@ -77,7 +78,8 @@ function Map() {
 
     const [pins, setPins] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
-    const { loading, data } = useQuery(QUERY_PINS);
+
+    const { loading, data, refetch } = useQuery(QUERY_PINS);
     const [addPin] = useMutation(ADD_PIN);
 
     useEffect(() => {
@@ -96,15 +98,13 @@ function Map() {
                 },
                 (error) => {
                     console.error('Error getting user location:', error);
-                    setUserLocation([40.7196, -74.0066]); // Set default location
+                    setUserLocation([40.7196, -74.0066]);
                 }
             );
         } else {
             console.error('Geolocation is not supported.');
-            setUserLocation([40.7196, -74.0066]); // Set default location
+            setUserLocation([40.7196, -74.0066]);
         }
-
-
     }, []);
 
     // const saveMarkers = async (newMarker) => {
@@ -134,7 +134,7 @@ function Map() {
                 },
             });
             console.log('Response Data:', data);
-            setPins((prevPins) => [...prevPins, formValues]);
+            refetch();
         } catch (error) {
             console.error('Error saving pin:', error);
         }
@@ -160,8 +160,12 @@ function Map() {
                     />
                     {pins &&
                         pins.map((pin, index) =>
-                            pin.pinLat ? ( // Check if the coords property exists
-                                <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
+                            pin.pinLat ? (
+                                <Marker
+                                    key={index}
+                                    position={[pin.pinLat, pin.pinLon]}
+                                    icon={classIIIPin}
+                                >
                                     <Popup>
                                         Marker at {pin.pinLon}, {pin.pinLat}
                                         <br />
@@ -177,12 +181,13 @@ function Map() {
                                                 <button class="delete-button">Delete</button>
                                             </div>
                                         </form>
+                                        
+                                        <RemovePin pinId={pin._id} onDelete={refetch}/>
                                     </Popup>
                                 </Marker>
-                            ) : null // If coords property doesn't exist, skip rendering the Marker
+                            ) : null
                         )}
                     <MapMarkers saveMarkers={saveMarkers} />
-                    {/* Ghostbusters HQ marker, Do not change */}
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>
             ) : (
