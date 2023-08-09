@@ -6,6 +6,8 @@ import L from 'leaflet';
 import OffCanvas from '../components/OffCanvas';
 import FormModal from '../components/NewPinModal';
 
+import Card from 'react-bootstrap/Card';
+
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
 
@@ -158,7 +160,7 @@ function Map() {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {pins &&
+                    {/* {pins &&
                         pins.map((pin, index) =>
                             pin.pinLat ? ( // Check if the coords property exists
                                 <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
@@ -180,7 +182,27 @@ function Map() {
                                     </Popup>
                                 </Marker>
                             ) : null // If coords property doesn't exist, skip rendering the Marker
-                        )}
+                        )} */}
+                        {pins &&
+                            pins.map((pin, index) =>
+                                pin.pinLat ? (
+                                    <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
+                                        <Popup>
+                                            <Card>
+                                                <Card.Body>
+                                                    <Card.Title>{pin.pinTitle}</Card.Title>
+                                                    <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
+                                                    <Card.Text>{pin.pinText}{pin.pinDescription}</Card.Text>
+                                                    <Card.Footer>By {pin.pinAuthor}</Card.Footer>
+
+                                                    
+                                                </Card.Body>
+                                            </Card>
+                                        </Popup>
+                                    </Marker>
+                                ) : null
+                            )}
+
                     <MapMarkers saveMarkers={saveMarkers} />
                     {/* Ghostbusters HQ marker, Do not change */}
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>

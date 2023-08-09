@@ -47,6 +47,7 @@ export const ADD_PIN = gql`
       pinLat
       pinLon
       pinTitle
+      pinText
       pinAuthor
       createdAt
     }
