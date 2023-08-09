@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import OffCanvas from '../components/OffCanvas';
+import FormModal from '../components/NewPinModal';
 
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
@@ -23,44 +24,6 @@ const ghostBustin = L.icon({
     iconAnchor: [20, 42],
 });
 
-// function MapMarkers({ saveMarkers }) {
-//     const [openForm, setOpenForm] = useState(false);
-//     const [formValues, setFormValues] = useState({
-//         title: '',
-//         description: '',
-//     });
-
-//     const handleFormSubmit = (values) => {
-//         saveMarkers(values);
-//         setOpenForm(false); // Close the form after submission
-//     };
-
-//     useMapEvents({
-//         click: (e) => {
-//             const { lat, lng } = e.latlng;
-//             setFormValues({
-//                 title: '',
-//                 description: '',
-//             });
-//             setOpenForm(true);
-//         },
-//     });
-
-//     return (
-//         <>
-//             {openForm && (
-//                 <FormModal
-//                     openForm={openForm}
-//                     onClose={() => setOpenForm(false)}
-//                     onSubmit={handleFormSubmit}
-//                     formValues={formValues}
-//                     setFormValues={setFormValues}
-//                 />
-//             )}
-//         </>
-//     );
-// }
-
 function MapMarkers({ saveMarkers }) {
     const [openForm, setOpenForm] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -69,9 +32,10 @@ function MapMarkers({ saveMarkers }) {
     });
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
+    //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
     const handleFormSubmit = (values) => {
         saveMarkers(values);
-        setOpenForm(false); // Close the form after submission
+        setOpenForm(false); 
     };
 
     useMapEvents({
@@ -82,11 +46,43 @@ function MapMarkers({ saveMarkers }) {
                     title: '',
                     description: '',
                 });
-                setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY }); // Store click position
+                setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY }); 
+                // setClickPosition({ x: lat, y: lng });
                 setOpenForm(true);
             }
         },
     });
+    //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
+
+    //////// NEW FORMSUBMIT AND MAPEVENTS //////////////
+    // const handleFormSubmit = async (lat, lng) => {
+    //     try {
+    //         console.log("SUBMITTING FORM")
+    //         const newMarker = {
+    //             title: formValues.title,
+    //             coords: [lat, lng],
+    //         };
+    //         await saveMarkers(newMarker);
+    //         setOpenForm(false);
+    //     } catch (error) {
+    //         console.error('Error saving pin:', error);
+    //     }
+    // };
+
+    // useMapEvents({
+    //     click: (e) => {
+    //         const { lat, lng } = e.latlng;
+    //         if (!openForm) {
+    //             setFormValues({
+    //                 title: '',
+    //                 description: '',
+    //             });
+    //             setOpenForm(true);
+    //         }
+    //     },
+    // });
+
+    //////// NEW FORMSUBMIT AND MAPEVENTS //////////////
 
     return (
         <>
@@ -97,86 +93,13 @@ function MapMarkers({ saveMarkers }) {
                     onSubmit={handleFormSubmit}
                     formValues={formValues}
                     setFormValues={setFormValues}
-                    position={clickPosition} // Pass click position
+                    position={clickPosition} 
                 />
             )}
         </>
     );
 }
 
-
-function FormModal({ openForm, onClose, onSubmit, formValues, setFormValues, position }) {
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues((prevValues) => ({
-            ...prevValues,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formValues);
-        onClose();
-    };
-
-    return (
-        <div
-            className={`modal ${openForm ? 'is-active' : ''}`}
-            style={{
-                position: 'absolute',
-                top: `${position.y - 90}px`, // Adjust for placement
-                left: `${position.x}px`,
-            }}
-            onClick={(e) => {
-                e.stopPropagation(); // Prevent clicks from propagating to the form container
-            }}
-        >
-            {/* <div className="modal-background" onClick={onClose}></div>
-            <div className="modal-content"> */}
-            <div className="modal-card" onClick={(e) => e.stopPropagation()}> 
-                <header className="modal-card-head">
-                    <p className="modal-card-title">Add a Pin!</p>
-                    <button className="delete" aria-label="close" onClick={onClose}></button>
-                </header>
-                <section className="modal-card-body">
-                    <form onSubmit={handleSubmit}>
-                        <div className="field">
-                            <label className="label">Pin Title</label>
-                            <div className="control">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    name="title"
-                                    value={formValues.title}
-                                    onChange={handleInputChange}
-                                    placeholder="Enter a title for this pin"
-                                />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Pin Text</label>
-                            <div className="control">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    name="description"
-                                    value={formValues.description}
-                                    onChange={handleInputChange}
-                                    placeholder="Describe your encounter"
-                                />
-                            </div>
-                        </div>
-                        <button className="button is-primary" type="submit">Save Marker</button>
-                        <button className="button" type="button" onClick={onClose}>Cancel</button>
-                    </form>
-                </section>
-            </div>
-            <button className="modal-close is-large" aria-label="close" onClick={onClose}></button> 
-        </div>
-    );
-    
-}
 
 function Map() {
 
