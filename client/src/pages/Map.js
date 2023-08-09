@@ -25,44 +25,6 @@ const ghostBustin = L.icon({
     iconAnchor: [20, 42],
 });
 
-// function MapMarkers({ saveMarkers }) {
-//     const [openForm, setOpenForm] = useState(false);
-//     const [formValues, setFormValues] = useState({
-//         title: '',
-//         description: '',
-//     });
-
-//     const handleFormSubmit = (values) => {
-//         saveMarkers(values);
-//         setOpenForm(false); // Close the form after submission
-//     };
-
-//     useMapEvents({
-//         click: (e) => {
-//             const { lat, lng } = e.latlng;
-//             setFormValues({
-//                 title: '',
-//                 description: '',
-//             });
-//             setOpenForm(true);
-//         },
-//     });
-
-//     return (
-//         <>
-//             {openForm && (
-//                 <FormModal
-//                     openForm={openForm}
-//                     onClose={() => setOpenForm(false)}
-//                     onSubmit={handleFormSubmit}
-//                     formValues={formValues}
-//                     setFormValues={setFormValues}
-//                 />
-//             )}
-//         </>
-//     );
-// }
-
 function MapMarkers({ saveMarkers }) {
     const [openForm, setOpenForm] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -72,6 +34,7 @@ function MapMarkers({ saveMarkers }) {
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
     const [clickCoordinates, setClickCoordinates] = useState({ lat: 0, lng: 0 });
 
+    //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
     const handleFormSubmit = (values) => {
         saveMarkers(values);
         setOpenForm(false); 
@@ -94,6 +57,37 @@ function MapMarkers({ saveMarkers }) {
             }
         },
     });
+    //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
+
+    //////// NEW FORMSUBMIT AND MAPEVENTS //////////////
+    // const handleFormSubmit = async (lat, lng) => {
+    //     try {
+    //         console.log("SUBMITTING FORM")
+    //         const newMarker = {
+    //             title: formValues.title,
+    //             coords: [lat, lng],
+    //         };
+    //         await saveMarkers(newMarker);
+    //         setOpenForm(false);
+    //     } catch (error) {
+    //         console.error('Error saving pin:', error);
+    //     }
+    // };
+
+    // useMapEvents({
+    //     click: (e) => {
+    //         const { lat, lng } = e.latlng;
+    //         if (!openForm) {
+    //             setFormValues({
+    //                 title: '',
+    //                 description: '',
+    //             });
+    //             setOpenForm(true);
+    //         }
+    //     },
+    // });
+
+    //////// NEW FORMSUBMIT AND MAPEVENTS //////////////
 
     return (
         <>
