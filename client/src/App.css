@@ -85,6 +85,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .pin-modal-card {
   /* width: 15vw; */
   width: 100%;
@@ -96,6 +97,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+
 }
 
 .pin-modal-card-head {
@@ -118,6 +120,7 @@
 .pin-modal-card-body {
   padding: 1rem;
   flex: 1;
+
 }
 
 .pin-close {

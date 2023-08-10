@@ -202,7 +202,6 @@ function Map() {
                                         Marker at {pin.pinLon}, {pin.pinLat}
                                         <br />
                                         Pin Title {pin.pinTitle}
-<<<<<<< HEAD
                                         <br />
                                         <form class="popup-form">
                                             <div class="form-group">
@@ -211,24 +210,9 @@ function Map() {
                                             </div>
                                             <div class="d-flex">
                                                 <button type="submit" class="btn">Save</button>
-                                                <button class="delete-button">Delete</button>
                                             </div>
                                         </form>
-                                        
-=======
->>>>>>> 899c2e5 (pins are being successfully added)
                                         <RemovePin pinId={pin._id} onDelete={refetch}/>
-                                        <br />
-                                        <form class="popup-form">
-                                            <div class="form-group">
-                                                <label class="mb-0" for="comment">Comment:</label>
-                                                <textarea class="form-control comment" rows="4"></textarea>
-                                            </div>
-                                            <div class="d-flex">
-                                                <button type="submit" class="btn">Save</button>
-                                                <button class="delete-button">Delete</button>
-                                            </div>
-                                        </form>
                                     </Popup>
                                 </Marker>
                             ) : null
