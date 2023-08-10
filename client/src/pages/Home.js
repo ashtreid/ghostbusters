@@ -116,7 +116,7 @@ const Home = () => {
         </Carousel>
         <Col className='text-center'>
           <GhostBustersAd />
-          {/* <AudioComponent /> {AudioComponent} */}
+          <AudioComponent /> {AudioComponent}
         </Col>
       </Row>
     </Container>
