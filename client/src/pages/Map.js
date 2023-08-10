@@ -168,7 +168,6 @@ function Map() {
                                     </Marker>
                                 ) : null
                             )}
-
                     <MapMarkers saveMarkers={saveMarkers} />
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>

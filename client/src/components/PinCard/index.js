@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
@@ -10,7 +7,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { ADD_COMMENT } from '../../utils/mutations';
 import { QUERY_PINS } from '../../utils/queries';
 
-
 function PinCard({ pin, commentsVisible, toggleComments }) {
     const [commentFormValue, setCommentForm] = useState('');
     const { loading, data, refetch } = useQuery(QUERY_PINS);
@@ -19,8 +15,6 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
             console.log("DATA.PINS:", data.pins);
         }
     }, [data, loading]);
-
-
 
     const [addComment] = useMutation(ADD_COMMENT);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_PIN } from '../../utils/mutations';
+import Button from 'react-bootstrap/Button';
 
 const RemovePinHook = () => {
     const [removePin, { loading, error }] = useMutation(REMOVE_PIN);
@@ -35,7 +36,7 @@ const RemovePin = ({ pinId, onDelete }) => {
 
     return (
         <div>
-            <button onClick={deleteHandle} disabled={loading}>Delete Pin</button>
+            <Button onClick={deleteHandle} disabled={loading}>Delete Pin</Button>
             {loading && <p>Deleting...</p>}
             {error && <p>Error: {error.message}</p>}
         </div>
