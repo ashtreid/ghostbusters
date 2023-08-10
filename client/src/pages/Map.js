@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+
 import OffCanvas from '../components/OffCanvas';
 import FormModal from '../components/NewPinModal';
 import RemovePin from '../components/RemovePins';
@@ -212,6 +213,7 @@ function Map() {
                                                 <button type="submit" class="btn">Save</button>
                                             </div>
                                         </form>
+
                                         <RemovePin pinId={pin._id} onDelete={refetch}/>
                                     </Popup>
                                 </Marker>
