@@ -1,7 +1,5 @@
 import React from 'react';
 
-import OffCanvas from '../components/OffCanvas';
-
 import { Container, Row, Col, Stack, Carousel, Image, Figure, Anchor } from 'react-bootstrap';
 import telephone from '../customIcons/telephone.gif';
 import people from '../customIcons/people.png';
@@ -37,7 +35,6 @@ const Home = () => {
 //   const thoughts = data?.thoughts || [];
 
   return (
-
     <Container className='ad'>
       <Row>
         <Carousel className='text-center p-4' indicators={false} controls={false}>
