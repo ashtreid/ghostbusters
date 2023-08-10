@@ -62,8 +62,6 @@ function MapMarkers({ saveMarkers }) {
                 setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY });
                 setClickCoordinates({ lat, lng });
                 setOpenForm(true);
-                console.log("click coords:", clickCoordinates);
-                console.log("click position:", clickPosition);
             }
         },
     });
@@ -98,7 +96,6 @@ function Map() {
     useEffect(() => {
         if (!loading && data) {
             setPins(data.pins);
-            console.log("DATA.PINS:", data.pins);
         }
     }, [data, loading]);
 
@@ -122,7 +119,6 @@ function Map() {
 
     const saveMarkers = async (formValues) => {
         try {
-            console.log("formValues:", formValues);
             const { data } = await addPin({
                 variables: {
                     pinLat: formValues.lat,
@@ -131,8 +127,6 @@ function Map() {
                     pinText: formValues.description,
                 },
             });
-            console.log('pinText:', formValues.description)
-            console.log('Response Data:', data);
             refetch();
         } catch (error) {
             console.error('Error saving pin:', error);
