@@ -60,6 +60,7 @@ function MapMarkers({ saveMarkers }) {
                 setClickCoordinates({ lat, lng });
                 setOpenForm(true);
                 console.log("click coords:", clickCoordinates)
+                console.log("click position:", clickPosition)
             }
         },
     });
