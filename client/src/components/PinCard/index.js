@@ -72,6 +72,7 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
                         value={commentFormValue}
                         onChange={handleInputChange}
                         placeholder="Enter a comment!"
+                        autoFocus
                     />
                 </Form.Group>
                 <div className="d-flex" style={{ justifyContent: 'center', width: '100%' }}>
