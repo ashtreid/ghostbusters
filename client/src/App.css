@@ -77,6 +77,10 @@
 
 /* Add these styles to make the form appear like a card */
 
+.mb-3 {
+  padding-top: 5%;
+}
+
 .pin-modal {
   width: 15vw;
   height: 20vw;
@@ -120,7 +124,24 @@
 .pin-modal-card-body {
   padding: 1rem;
   flex: 1;
+  background-color: rgb(184, 186, 204);
+}
 
+.pin-label {
+  padding-bottom: 3%;
+  font-size: large;
+  font-weight: bold;
+}
+
+.pin-input {
+  padding: 3%;
+  border: seashell;
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 4%;
+}
+
+.pin-text-input {
+  padding-top: 5%;
 }
 
 .pin-close {
