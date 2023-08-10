@@ -5,24 +5,22 @@ function CommentsComponent({ comments }) {
     if (!comments || comments.length === 0) {
       return (
         <div>
-          <hr />
-          <Card className="my-2">
+          {/* <Card className="my-2"> */}
             <Card.Body>
               <Card.Text>This pin doesn't have any comments yet. Be the first to add one!</Card.Text>
             </Card.Body>
-          </Card>
+          {/* </Card> */}
         </div>
       );
     }
   
     return (
       <div>
-        <hr />
         {comments.map((comment) => (
           <Card key={comment._id} className="my-2">
-            <Card.Body>
-              <Card.Title>{comment.commentText}</Card.Title>
-              <Card.Text>{comment.commentAuthor}  ·  {comment.createdAt}</Card.Text>
+            <Card.Body style={{ textAlign: 'left' }}>
+              <Card.Text>{comment.commentText}</Card.Text>
+              <Card.Text style={{ fontSize: '10px' }}>{comment.commentAuthor}  ·  {comment.createdAt}</Card.Text>
             </Card.Body>
           </Card>
         ))}

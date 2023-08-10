@@ -47,38 +47,40 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
 
     return (
         <Card >
-            <Card.Header>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Header>
+            <Card.Header style={{ textAlign: 'center' }}>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Header>
             <Card.Body>
-                <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
-                <Card.Title>{pin.pinTitle}</Card.Title>
-                <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
+                <Card.Title><strong>{pin.pinTitle}</strong></Card.Title>
                 <Card.Text>{pin.pinText}</Card.Text>
-                <Card.Text>By {pin.pinAuthor} on {pin.createdAt}</Card.Text>
-                <Card.Footer onClick={handleCardClick}>
-                    {!commentsVisible[pin._id] && (
-                        <Card.Text >Click to view comments</Card.Text>
-                    )}
-                    {commentsVisible[pin._id] && (
-                        <CommentsComponent comments={pin.comments} />
-                    )}
-                </Card.Footer>
-                <Form>
-                    <Form.Group>
-                        <Form.Label className="mb-0" htmlFor="comment"></Form.Label>
-                        <Form.Control
-                            className="input"
-                            type="text"
-                            name="text"
-                            value={commentFormValue}
-                            onChange={handleInputChange}
-                            placeholder="Enter a comment!"
-                        />
-                    </Form.Group>
-                    <div className="d-flex">
-                        <Button type="button" className="btn" onClick={handleCommentSubmit}>Save Comment</Button>
-                    </div>
-                </Form>
+                <Card.Text style={{ fontSize: '10px', textAlign: 'center' }}>By <strong>{pin.pinAuthor}</strong> on {pin.createdAt}</Card.Text>
+
             </Card.Body>
+            <Card.Footer onClick={handleCardClick} style={{ textAlign: 'center' }}>
+                {!commentsVisible[pin._id] && (
+                    <Card.Text style={{ textDecoration: 'underline' }}>Click to view comments</Card.Text>
+                )}
+                {commentsVisible[pin._id] && (
+                    <CommentsComponent comments={pin.comments} />
+                )}
+            </Card.Footer>
+            <Form>
+                <Form.Group>
+                    <Form.Label className="mb-0" htmlFor="comment"></Form.Label>
+                    <Form.Control
+                        className="input"
+                        type="text"
+                        name="text"
+                        value={commentFormValue}
+                        onChange={handleInputChange}
+                        placeholder="Enter a comment!"
+                        autoFocus
+                    />
+                </Form.Group>
+                <div className="d-flex" style={{ justifyContent: 'center', width: '100%' }}>
+                    <Button type="button" className="btn" onClick={handleCommentSubmit} style={{ width: '100%' }}>
+                        Save Comment
+                    </Button>
+                </div>
+            </Form>
         </Card>
     );
 }
