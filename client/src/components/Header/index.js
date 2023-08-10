@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../../utils/queries';
 import { Link, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import AuthModals from '../AuthModals';
@@ -25,11 +23,6 @@ const Header = () => {
     setShowPinBtn(isParanormalPage);
   }, [isParanormalPage]);
 
-  const { loading, error, data } = useQuery(QUERY_ME);
-  if (loading) return <p>Loading...</p>;
-  if (error) return null;
-  const user = data.me;
-
   return (
     <>
       <Navbar bg='dark' variant='dark' collapseOnSelect expand='lg'>
@@ -41,10 +34,6 @@ const Header = () => {
               className="bustinLogo"
             />STBUSTERS
           </Navbar.Brand>
-
-          <Navbar className='user-greeting ml-auto d-flex'>
-              <p>We're ready to believe you, {user.username}!</p>
-            </Navbar>
 
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav' className='d-flex flex-row-reverse'>
