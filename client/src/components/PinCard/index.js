@@ -11,7 +11,7 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
                 <Card.Title>{pin.pinTitle}</Card.Title>
                 <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
                 <Card.Text>{pin.pinText}</Card.Text>
-                <Card.Footer>By {pin.pinAuthor}</Card.Footer>
+                <Card.Footer>By {pin.pinAuthor} on {pin.createdAt}</Card.Footer>
                 {!commentsVisible[pin._id] && (
                     <Card.Text>Click to view comments</Card.Text>
                 )}
@@ -28,8 +28,6 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
                         <button className="delete-button">Delete</button>
                     </div>
                 </form>
-
-
             </Card.Body>
         </Card>
     );

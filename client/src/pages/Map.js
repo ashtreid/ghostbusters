@@ -15,6 +15,7 @@ import bustin from '../customIcons/bustin.png';
 
 import { ADD_PIN } from '../utils/mutations';
 import { QUERY_PINS } from '../utils/queries';
+import { ADD_COMMENT } from '../utils/mutations';
 
 const classIIIPin = L.icon({
     iconUrl: classIII,
@@ -83,6 +84,7 @@ function Map() {
     const [userLocation, setUserLocation] = useState(null);
     const { loading, data } = useQuery(QUERY_PINS);
     const [addPin] = useMutation(ADD_PIN);
+    const [addComment] = useMutation(ADD_COMMENT);
 
     useEffect(() => {
         if (!loading && data) {
@@ -152,67 +154,16 @@ function Map() {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {/* {pins &&
-                        pins.map((pin, index) =>
-                            pin.pinLat ? ( // Check if the coords property exists
-                                <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
-                                    <Popup>
-                                        Marker at {pin.pinLon}, {pin.pinLat}
-                                        <br />
-                                        Pin Title {pin.pinTitle}
-                                        <br />
-                                        <form class="popup-form">
-                                            <div class="form-group">
-                                                <label class="mb-0" for="comment">Pin Description</label>
-                                                <textarea class="form-control comment" rows="4"></textarea>
-                                            </div>
-                                            <div class="d-flex">
-                                                <button type="submit" class="btn">Save</button>
-                                                <button class="delete-button">Delete</button>
-                                            </div>
-                                        </form>
-                                    </Popup>
-                                </Marker>
-                            ) : null // If coords property doesn't exist, skip rendering the Marker
-                        )} */}
                         {pins &&
                             pins.map((pin, index) =>
                                 pin.pinLat ? (
                                     <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
                                         <Popup>
-                                        <PinCard
-                                            pin={pin}
-                                            commentsVisible={commentsVisible}
-                                            toggleComments={toggleComments}
-                                            />
-                                            {/* <Card
-                                            onClick={() => toggleComments(pin._id)}
-                                            >
-                                                <Card.Body>
-                                                    <Card.Title>{pin.pinTitle}</Card.Title>
-                                                    <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
-                                                    <Card.Text>{pin.pinText}</Card.Text>
-                                                    <Card.Footer>By {pin.pinAuthor}</Card.Footer>
-                                                    {!commentsVisible[pin._id] && (
-                                                    <Card.Text>Click to view comments</Card.Text>
-                                                    )}
-                                                    {commentsVisible[pin._id] && (
-                                                    <CommentsComponent comments={pin.comments} />
-                                                    )}
-                                                    <form className="popup-form">
-                                                        <div className="form-group">
-                                                            <label className="mb-0" htmlFor="comment"></label>
-                                                            <textarea className="form-control comment" rows="4"></textarea>
-                                                        </div>
-                                                        <div className="d-flex">
-                                                            <button type="submit" className="btn">Save</button>
-                                                            <button className="delete-button">Delete</button>
-                                                        </div>
-                                                    </form>
-
-                                                    
-                                                </Card.Body>
-                                            </Card> */}
+                                            <PinCard
+                                                pin={pin}
+                                                commentsVisible={commentsVisible}
+                                                toggleComments={toggleComments}
+                                                />
                                         </Popup>
                                     </Marker>
                                 ) : null
@@ -228,35 +179,6 @@ function Map() {
         </div>
     );
 }
-
-// function CommentsComponent({ comments }) {
-//     if (!comments || comments.length === 0) {
-//       return (
-//         <div>
-//           <hr />
-//           <Card className="my-2">
-//             <Card.Body>
-//               <Card.Text>This pin doesn't have any comments yet. Be the first to add one!</Card.Text>
-//             </Card.Body>
-//           </Card>
-//         </div>
-//       );
-//     }
-  
-//     return (
-//       <div>
-//         <hr />
-//         {comments.map((comment) => (
-//           <Card key={comment._id} className="my-2">
-//             <Card.Body>
-//               <Card.Title>{comment.commentText}</Card.Title>
-//               <Card.Text>{comment.commentAuthor}  ·  {comment.createdAt}</Card.Text>
-//             </Card.Body>
-//           </Card>
-//         ))}
-//       </div>
-//     );
-// }
 
 export default Map;
 
