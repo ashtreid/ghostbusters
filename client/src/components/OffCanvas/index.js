@@ -11,7 +11,7 @@ function OffCanvas({ showMyPins, setShowMyPins }) {
   const { loading, error, data } = useQuery(QUERY_ME);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return null;
 
   const user = data.me;
 
@@ -21,9 +21,9 @@ function OffCanvas({ showMyPins, setShowMyPins }) {
 
   return (
     <>
-      <Offcanvas show={showMyPins} onHide={handleClose} scroll={false} backdrop={true}>
+      <Offcanvas show={showMyPins} onHide={handleClose} scroll={false} backdrop='static'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{user.username}'s Pins</Offcanvas.Title>
+          <Offcanvas.Title className='offcanvas-title'>{user.username}'s Pins</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {user && user.pins && user.pins.length > 0 ? (

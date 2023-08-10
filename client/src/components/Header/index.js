@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../../utils/queries';
 import { Link, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import AuthModals from '../AuthModals';
@@ -23,6 +25,11 @@ const Header = () => {
     setShowPinBtn(isParanormalPage);
   }, [isParanormalPage]);
 
+  const { loading, error, data } = useQuery(QUERY_ME);
+  if (loading) return <p>Loading...</p>;
+  if (error) return null;
+  const user = data.me;
+
   return (
     <>
       <Navbar bg='dark' variant='dark' collapseOnSelect expand='lg'>
@@ -35,15 +42,19 @@ const Header = () => {
             />STBUSTERS
           </Navbar.Brand>
 
+          <Navbar className='user-greeting ml-auto d-flex'>
+              <p>We're ready to believe you, {user.username}!</p>
+            </Navbar>
+
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav' className='d-flex flex-row-reverse'>
             {Auth.loggedIn() ? (
-              <Nav className='ml-auto d-flex'>
+              <Nav className='nav-header-link ml-auto d-flex'>
                 <Nav.Link as={Link} onClick={() => setShowPinBtn(true)} to='/paranormal'>
                   Ghost Sightings
                 </Nav.Link>
                 {showPinBtn && (
-                  <Nav.Link as={Link} show={showPinBtn} onClick={() => setShowMyPins(true)} className="me-2">
+                  <Nav.Link as={Link} show={showPinBtn} onClick={() => setShowMyPins(true)} className="nav-header-link me-2">
                     My Pins
                   </Nav.Link>
                 )}
@@ -51,7 +62,7 @@ const Header = () => {
               </Nav>
             ) : (
               <Nav className='ml-auto d-flex'>
-                <Nav.Link as={Link} to='/paranormal'>
+                <Nav.Link className='nav-header-link' as={Link} to='/paranormal'>
                   Ghost Sightings
                 </Nav.Link>
                 <Button onClick={() => setShowModal(true)}>Login/Sign Up</Button>
