@@ -30,38 +30,6 @@ export const QUERY_USER = gql`
   }
 `;
 
-// export const QUERY_PINS = gql`
-// query getPins {
-//   users {
-//     pins {
-//       _id
-//       pinText
-//       pinAuthor
-//       createdAt
-//     }
-//   }
-// }
-// `;
-
-// export const QUERY_PINS = gql`
-//   query getPins($username: String) {
-//     pins(username: $username) {
-//       _id
-//       pinLat
-//       pinLon
-//       pinTitle
-//       pinAuthor
-//       createdAt
-//       comments {
-//         _id
-//         commentText
-//         commentAuthor
-//       }
-//     }
-//   }
-// `;
-
-
 export const QUERY_PINS = gql`
   query getPins {
     pins {
@@ -81,23 +49,6 @@ export const QUERY_PINS = gql`
     }
   }
 `;
-
-// export const QUERY_SINGLE_PIN = gql`
-//   query getSinglepin($pinId: ID!) {
-//     pin(pinId: $pinId) {
-//       _id
-//       pinTitle
-//       pinAuthor
-//       createdAt
-//       comments {
-//         _id
-//         commentText
-//         commentAuthor
-//         createdAt
-//       }
-//     }
-//   }
-// `;
 
 export const QUERY_SINGLE_PIN = gql`
   query getSinglepin {
