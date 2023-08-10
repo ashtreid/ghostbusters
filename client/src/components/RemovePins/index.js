@@ -36,7 +36,7 @@ const RemovePin = ({ pinId, onDelete }) => {
 
     return (
         <div className="d-flex" style={{ justifyContent: 'center', width: '100%' }}>
-            <Button variant="danger" onClick={deleteHandle} disabled={loading}>Delete Pin</Button>
+            <Button className='pin-card-btn' variant="danger" onClick={deleteHandle} disabled={loading}>Delete Pin</Button>
             {loading && <p>Deleting...</p>}
             {error && <p>Error: {error.message}</p>}
         </div>

@@ -12,10 +12,18 @@
   height: 100vh;
 }
 
-.ad {
+.ad, .loading-map {
   padding-top: 60px;
   font-family: 'Denk One', sans-serif;                                             
   font-size: 35px;
+}
+
+.add-pin-title, .pin-info-title, .offcanvas-title {
+  font-family: 'Denk One', sans-serif;
+}
+
+.nav-header-link {
+  font-size: 20px;
 }
 
 .video-responsive {
@@ -74,19 +82,27 @@
   margin-bottom: 20px;
 }
 
-.auth-label {
+label {
   display: block;
   margin-bottom: 5px;
 }
 
-.auth-input {
+input {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.auth-modal {
+.pin-card-btn {
+  margin-top: 10px;
+}
+
+.cancel-btn {
+  margin-left: 10px;
+}
+
+modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -122,75 +138,3 @@
   padding-top: 5%;
 }
 
-.pin-modal {
-  width: 15vw;
-  height: 20vw;
-  background-color: #333;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.pin-modal-card {
-  /* width: 15vw; */
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-
-}
-
-.pin-modal-card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #dbdbdb;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.pin-modal-card-title {
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-.pin-modal-card-body {
-  padding: 1rem;
-  flex: 1;
-  background-color: rgb(184, 186, 204);
-}
-
-.pin-label {
-  padding-bottom: 3%;
-  font-size: large;
-  font-weight: bold;
-}
-
-.pin-input {
-  padding: 3%;
-  border: seashell;
-  border-radius: 5px 5px 5px 5px;
-  margin-bottom: 4%;
-}
-
-.pin-text-input {
-  padding-top: 5%;
-}
-
-.pin-close {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #333;
-}
-
-/* Add Pin Form Styling */

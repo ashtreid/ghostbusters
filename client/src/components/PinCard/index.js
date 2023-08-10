@@ -49,7 +49,7 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
         <Card >
             <Card.Header style={{ textAlign: 'center' }}>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Header>
             <Card.Body>
-                <Card.Title><strong>{pin.pinTitle}</strong></Card.Title>
+                <Card.Title className='pin-info-title'><strong>{pin.pinTitle}</strong></Card.Title>
                 <Card.Text>{pin.pinText}</Card.Text>
                 <Card.Text style={{ fontSize: '10px', textAlign: 'center' }}>By <strong>{pin.pinAuthor}</strong> on {pin.createdAt}</Card.Text>
 
@@ -76,7 +76,7 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
                     />
                 </Form.Group>
                 <div className="d-flex" style={{ justifyContent: 'center', width: '100%' }}>
-                    <Button type="button" className="btn" onClick={handleCommentSubmit} style={{ width: '100%' }}>
+                    <Button type="button" className="btn pin-card-btn" onClick={handleCommentSubmit} style={{ width: '100%' }}>
                         Save Comment
                     </Button>
                 </div>

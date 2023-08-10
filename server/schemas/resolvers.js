@@ -18,9 +18,6 @@ const resolvers = {
       const params = username ? { pinAuthor: username } : {};
       return Pin.find(params).populate('comments');
     },
-    // pins: async () => {
-    //   return Pin.find().populate('pins');
-    // },
     
     // query a single pin by classification
     pinsByClassification: async (parent, { pinClassification }) => {

@@ -11,11 +11,13 @@ import RemovePin from '../components/RemovePins';
 import PinCard from '../components/PinCard'
 import AuthModals from '../components/AuthModals';
 
+import hauntLoading from '../customIcons/hauntLoading.gif';
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
 
 import { ADD_PIN } from '../utils/mutations';
 import { QUERY_PINS } from '../utils/queries';
+import { Figure } from 'react-bootstrap';
 
 const classIIIPin = L.icon({
     iconUrl: classIII,
@@ -178,7 +180,20 @@ function Map() {
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>
             ) : (
-                <p>Loading Map</p>
+                <div className='d-flex justify-content-center mb-3'>
+                    <Figure>
+                        <Figure.Image
+                            width={200}
+                            height={200}
+                            src={hauntLoading}
+                            alt='haunted house animated icons'
+                            title='Haunted house animated icons created by Freepik - Flaticon'
+                        />
+                        <Figure.Caption className='loading-map d-flex justify-content-center mb-3'>
+                            Loading Map
+                        </Figure.Caption>
+                    </Figure>
+                </div>
             )}
         </div>
     );
