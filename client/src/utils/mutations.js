@@ -23,23 +23,7 @@ export const ADD_USER = gql`
     }
   }
 `;
-// //pinLat, pinLon, pinClassification, pinTitle, pinText
-// export const ADD_PIN = gql`
-//   mutation addPin($pinLat: Float!, $pinLon: Float!, $pinClassification: String!, $pinTitle: String!, $pinText: String!) {
-//     addPin(pinLat: $pinLat, pinLon: $pinLon, pinClassification: $pinClassification, pinTitle: $pinTitle, pinText: $pinText) {
-//       _id
-//       pinLat
-//       pinLon
-//       pinClassification
-//       pinTitle
-//       pinText
-//       pinAuthor
-//       createdAt
-//     }
-//   }
-// `;
 
-//pinLat, pinLon, pinClassification, pinTitle, pinText
 export const ADD_PIN = gql`
   mutation addPin($pinLat: Float!, $pinLon: Float!, $pinTitle: String! $pinText: String!) {
     addPin(pinLat: $pinLat, pinLon: $pinLon, pinTitle: $pinTitle, pinText: $pinText) {
@@ -79,14 +63,3 @@ export const REMOVE_PIN = gql`
   }
 `;
 
-// export const REMOVE_PIN = gql`
-//   mutation removePin($pinId: ID!) {
-//     removePin(pinId: $pinId) {
-//       _id
-//       pinLat
-//       pinLon
-//       pinAuthor
-//       createdAt
-//     }
-//   }
-// `;
