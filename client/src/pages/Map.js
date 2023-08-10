@@ -4,10 +4,12 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
+import Auth from '../utils/auth';
 import OffCanvas from '../components/OffCanvas';
 import FormModal from '../components/NewPinModal';
 import RemovePin from '../components/RemovePins';
 import PinCard from '../components/PinCard'
+import AuthModals from '../components/AuthModals';
 
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
@@ -39,24 +41,27 @@ function MapMarkers({ saveMarkers }) {
 
     const handleFormSubmit = (values) => {
         saveMarkers(values);
-        setOpenForm(false); 
+        setOpenForm(false);
     };
 
+    const [showModal, setShowModal] = useState(false);
     useMapEvents({
         click: (e) => {
             const { lat, lng } = e.latlng;
-            if (!openForm) {
+            if (!Auth.loggedIn()) {
+                setShowModal(true);
+            } else if (!openForm) {
                 setFormValues({
                     title: '',
                     description: '',
                     lat: lat,
                     lng: lng,
                 });
-                setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY }); 
+                setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY });
                 setClickCoordinates({ lat, lng });
                 setOpenForm(true);
-                console.log("click coords:", clickCoordinates)
-                console.log("click position:", clickPosition)
+                console.log("click coords:", clickCoordinates);
+                console.log("click position:", clickPosition);
             }
         },
     });
@@ -70,10 +75,11 @@ function MapMarkers({ saveMarkers }) {
                     onSubmit={handleFormSubmit}
                     formValues={formValues}
                     setFormValues={setFormValues}
-                    position={clickPosition} 
+                    position={clickPosition}
                     coordinates={clickCoordinates}
                 />
             )}
+            <AuthModals showModal={showModal} setShowModal={setShowModal} />
         </>
     );
 }
@@ -130,7 +136,7 @@ function Map() {
             console.error('Error saving pin:', error);
         }
     };
-    
+
 
     const defaultCenter = [40.7196, -74.0066];
 
@@ -153,21 +159,21 @@ function Map() {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                        {pins &&
-                            pins.map((pin, index) =>
-                                pin.pinLat ? (
-                                    <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
-                                        <Popup>
-                                            <PinCard
-                                                pin={pin}
-                                                commentsVisible={commentsVisible}
-                                                toggleComments={toggleComments}
-                                                />
-                                            <RemovePin pinId={pin._id} onDelete={refetch}/>
-                                        </Popup>
-                                    </Marker>
-                                ) : null
-                            )}
+                    {pins &&
+                        pins.map((pin, index) =>
+                            pin.pinLat ? (
+                                <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
+                                    <Popup>
+                                        <PinCard
+                                            pin={pin}
+                                            commentsVisible={commentsVisible}
+                                            toggleComments={toggleComments}
+                                        />
+                                        <RemovePin pinId={pin._id} onDelete={refetch} />
+                                    </Popup>
+                                </Marker>
+                            ) : null
+                        )}
                     <MapMarkers saveMarkers={saveMarkers} />
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>
