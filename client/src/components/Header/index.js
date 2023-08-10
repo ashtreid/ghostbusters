@@ -41,6 +41,7 @@ const Header = () => {
 
       {/* set modal data up */}
       <Modal
+        className='auth-modal'
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
