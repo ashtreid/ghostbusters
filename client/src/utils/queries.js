@@ -76,6 +76,7 @@ export const QUERY_PINS = gql`
         _id
         commentText
         commentAuthor
+        createdAt
       }
     }
   }
