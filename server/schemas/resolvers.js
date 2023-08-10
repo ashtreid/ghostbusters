@@ -73,7 +73,7 @@ const resolvers = {
           pinLon,
           // pinClassification,
           pinTitle,
-          // pinText,
+          pinText,
           pinAuthor: context.user.username,
         });
 

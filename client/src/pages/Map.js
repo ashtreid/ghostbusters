@@ -4,6 +4,10 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
+import OffCanvas from '../components/OffCanvas';
+import FormModal from '../components/NewPinModal';
+import RemovePin from '../components/RemovePins';
+import PinCard from '../components/PinCard'
 
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
@@ -24,25 +28,64 @@ const ghostBustin = L.icon({
 });
 
 function MapMarkers({ saveMarkers }) {
+    const [openForm, setOpenForm] = useState(false);
+    const [formValues, setFormValues] = useState({
+        title: '',
+        description: '',
+    });
+    const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
+    const [clickCoordinates, setClickCoordinates] = useState({ lat: 0, lng: 0 });
+
+
+    const handleFormSubmit = (values) => {
+        saveMarkers(values);
+        setOpenForm(false); 
+    };
+
     useMapEvents({
         click: (e) => {
             const { lat, lng } = e.latlng;
-            const title = prompt("Enter a title for this marker:");
-            if (title) {
-                const newMarker = { coords: [lat, lng], title };
-                saveMarkers(newMarker);
+            if (!openForm) {
+                setFormValues({
+                    title: '',
+                    description: '',
+                    lat: lat,
+                    lng: lng,
+                });
+                setClickPosition({ x: e.originalEvent.clientX, y: e.originalEvent.clientY }); 
+                setClickCoordinates({ lat, lng });
+                setOpenForm(true);
+                console.log("click coords:", clickCoordinates)
+                console.log("click position:", clickPosition)
             }
         },
     });
 
-    return null;
+    return (
+        <>
+            {openForm && (
+                <FormModal
+                    openForm={openForm}
+                    onClose={() => setOpenForm(false)}
+                    onSubmit={handleFormSubmit}
+                    formValues={formValues}
+                    setFormValues={setFormValues}
+                    position={clickPosition} 
+                    coordinates={clickCoordinates}
+                />
+            )}
+        </>
+    );
 }
 
 function Map() {
+    const [commentsVisible, setCommentsVisible] = useState({});
     const [pins, setPins] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
-    const { loading, data } = useQuery(QUERY_PINS);
+
+    const { loading, data, refetch } = useQuery(QUERY_PINS);
     const [addPin] = useMutation(ADD_PIN);
+
 
     useEffect(() => {
         if (!loading && data) {
@@ -60,37 +103,44 @@ function Map() {
                 },
                 (error) => {
                     console.error('Error getting user location:', error);
-                    setUserLocation([40.7196, -74.0066]); // Set default location
+                    setUserLocation([40.7196, -74.0066]);
                 }
             );
         } else {
             console.error('Geolocation is not supported.');
-            setUserLocation([40.7196, -74.0066]); // Set default location
+            setUserLocation([40.7196, -74.0066]);
         }
-
-
     }, []);
 
-    const saveMarkers = async (newMarker) => {
+    const saveMarkers = async (formValues) => {
         try {
+            console.log("formValues:", formValues);
             const { data } = await addPin({
                 variables: {
-                    pinLat: newMarker.coords[0],
-                    pinLon: newMarker.coords[1],
-                    pinTitle: newMarker.title,
+                    pinLat: formValues.lat,
+                    pinLon: formValues.lng,
+                    pinTitle: formValues.title,
+                    pinText: formValues.description,
                 },
             });
+            console.log('pinText:', formValues.description)
             console.log('Response Data:', data);
-            setPins((prevPins) => [...prevPins, newMarker]);
+            refetch();
         } catch (error) {
             console.error('Error saving pin:', error);
         }
     };
+    
 
     const defaultCenter = [40.7196, -74.0066];
 
+    const toggleComments = (pinId) => {
+        setCommentsVisible((prev) => ({ ...prev, [pinId]: !prev[pinId] }));
+    };
+
     return (
         <div>
+            <OffCanvas />
             {userLocation ? (
                 <MapContainer
                     className="Map"
@@ -103,31 +153,22 @@ function Map() {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {pins &&
-                        pins.map((pin, index) =>
-                            pin.pinLat ? ( // Check if the coords property exists
-                                <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
-                                    <Popup>
-                                        Marker at {pin.pinLon}, {pin.pinLat}
-                                        <br />
-                                        Comment: {pin.pinTitle}
-                                        {/* more stuff! */}
-                                        <form class="popup-form">  
-                                          <div class="form-group">
-                                            <label class="mb-0" for="comment">Comment:</label>
-                                            <textarea class="form-control, comment" rows="4"></textarea>
-                                          </div>
-                                          <div class="d-flex">  
-                                            <button type="submit" class="btn btn-outline-info btn-sm">Save</button>
-                                            <button class="delete-button">Delete</button>
-                                          </div>
-                                        </form>
-                                    </Popup>
-                                </Marker>
-                            ) : null // If coords property doesn't exist, skip rendering the Marker
-                        )}
+                        {pins &&
+                            pins.map((pin, index) =>
+                                pin.pinLat ? (
+                                    <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
+                                        <Popup>
+                                            <PinCard
+                                                pin={pin}
+                                                commentsVisible={commentsVisible}
+                                                toggleComments={toggleComments}
+                                                />
+                                            <RemovePin pinId={pin._id} onDelete={refetch}/>
+                                        </Popup>
+                                    </Marker>
+                                ) : null
+                            )}
                     <MapMarkers saveMarkers={saveMarkers} />
-                    {/* Ghostbusters HQ marker, Do not change */}
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>
             ) : (
@@ -138,3 +179,5 @@ function Map() {
 }
 
 export default Map;
+
+
