@@ -12,7 +12,7 @@
   height: 100vh;
 }
 
-.ad {
+.ad, .loading-map {
   padding-top: 60px;
   font-family: 'Denk One', sans-serif;                                             
   font-size: 35px;

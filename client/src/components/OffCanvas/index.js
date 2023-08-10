@@ -1,17 +1,12 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
+import { Offcanvas, Card } from 'react-bootstrap';
 
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Card from 'react-bootstrap/Card';
-
-function OffCanvas() {
-  const [show, setShow] = useState(false);
+function OffCanvas({ showMyPins, setShowMyPins }) {
   const [commentsVisible, setCommentsVisible] = useState({});
 
-  const handleClose = () => setShow(false);
-  const toggleShow = () => setShow((s) => !s);
+  const handleClose = () => setShowMyPins(false);
 
   const { loading, error, data } = useQuery(QUERY_ME);
 
@@ -26,10 +21,7 @@ function OffCanvas() {
 
   return (
     <>
-      <Button variant="primary" onClick={toggleShow} className="me-2">
-        My Pins
-      </Button>
-      <Offcanvas show={show} onHide={handleClose} scroll={false} backdrop={true}>
+      <Offcanvas show={showMyPins} onHide={handleClose} scroll={false} backdrop={true}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{user.username}'s Pins</Offcanvas.Title>
         </Offcanvas.Header>
@@ -66,32 +58,32 @@ function OffCanvas() {
 }
 
 function CommentsComponent({ comments }) {
-    if (!comments || comments.length === 0) {
-      return (
-        <div>
-          <hr />
-          <Card className="my-2">
-            <Card.Body>
-              <Card.Text>This pin doesn't have any comments yet.</Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
-      );
-    }
-  
+  if (!comments || comments.length === 0) {
     return (
       <div>
         <hr />
-        {comments.map((comment) => (
-          <Card key={comment._id} className="my-2">
-            <Card.Body>
-              <Card.Title>{comment.commentText}</Card.Title>
-              <Card.Text>{comment.commentAuthor}  ·  {comment.createdAt}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
+        <Card className="my-2">
+          <Card.Body>
+            <Card.Text>This pin doesn't have any comments yet.</Card.Text>
+          </Card.Body>
+        </Card>
       </div>
     );
+  }
+
+  return (
+    <div>
+      <hr />
+      {comments.map((comment) => (
+        <Card key={comment._id} className="my-2">
+          <Card.Body>
+            <Card.Title>{comment.commentText}</Card.Title>
+            <Card.Text>{comment.commentAuthor}  ·  {comment.createdAt}</Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
+    </div>
+  );
 }
 
 export default OffCanvas;
