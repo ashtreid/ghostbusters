@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button'
 import { useMutation } from '@apollo/client';
 import { REMOVE_PIN } from '../../utils/mutations';
-import Button from 'react-bootstrap/Button';
 
 const RemovePinHook = () => {
     const [removePin, { loading, error }] = useMutation(REMOVE_PIN);
