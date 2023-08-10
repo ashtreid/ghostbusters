@@ -41,12 +41,13 @@ export const ADD_USER = gql`
 
 //pinLat, pinLon, pinClassification, pinTitle, pinText
 export const ADD_PIN = gql`
-  mutation addPin($pinLat: Float!, $pinLon: Float!, $pinTitle: String!) {
-    addPin(pinLat: $pinLat, pinLon: $pinLon, pinTitle: $pinTitle) {
+  mutation addPin($pinLat: Float!, $pinLon: Float!, $pinTitle: String! $pinText: String!) {
+    addPin(pinLat: $pinLat, pinLon: $pinLon, pinTitle: $pinTitle, pinText: $pinText) {
       _id
       pinLat
       pinLon
       pinTitle
+      pinText
       pinAuthor
       createdAt
     }
@@ -55,11 +56,7 @@ export const ADD_PIN = gql`
 
 export const ADD_COMMENT = gql`
   mutation addComment($pinId: ID!, $commentText: String!) {
-    addComment(pintId: $pinId, commentText: $commentText) {
-      _id
-      pinText
-      pinAuthor
-      createdAt
+    addComment(pinId: $pinId, commentText: $commentText) {
       comments {
         _id
         commentText

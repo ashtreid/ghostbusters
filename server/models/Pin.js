@@ -73,30 +73,3 @@ const Pin = model('Pin', pinSchema);
 
 module.exports = Pin;
 
-// TODO: Remove the below original comments prior to becominng a subdocument if no longer needed
-// comments: [
-//     {
-//       commentText: {
-//         type: String,
-//         required: true,
-//         minlength: 1,
-//         maxlength: 280,
-//       },
-//       commentAuthor: {
-//         type: String,
-//         required: true,
-//       },
-//       createdAt: {
-//         type: Date,
-//         default: Date.now,
-//         get: (timestamp) => dateFormat(timestamp),
-//       },
-//     },
-//   ],
-
-  // comments: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Comment',
-  //   },
-  // ]

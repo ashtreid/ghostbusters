@@ -48,7 +48,7 @@ const typeDefs = gql`
 
     # TODO: addPin will need some tweaks for location (lat, lon) to work with the map
     # addPin(pinLat: Float!, pinLon: Float!, pinClassification: String!, pinTitle: String!, pinText: String!): Pin
-    addPin(pinLat: Float!, pinLon: Float!, pinTitle: String!): Pin
+    addPin(pinLat: Float!, pinLon: Float!, pinTitle: String!, pinText: String!): Pin
 
     removePin(pinId: ID!): Pin
     addComment(pinId: ID!, commentText: String!): Pin

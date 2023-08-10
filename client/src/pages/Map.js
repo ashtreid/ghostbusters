@@ -7,12 +7,17 @@ import L from 'leaflet';
 import OffCanvas from '../components/OffCanvas';
 import FormModal from '../components/NewPinModal';
 import RemovePin from '../components/RemovePins';
+import PinCard from '../components/PinCard'
+import CommentsComponent from '../components/PinComments';
+
+import Card from 'react-bootstrap/Card';
 
 import classIII from '../customIcons/classIII.png';
 import bustin from '../customIcons/bustin.png';
 
 import { ADD_PIN } from '../utils/mutations';
 import { QUERY_PINS } from '../utils/queries';
+import { ADD_COMMENT } from '../utils/mutations';
 
 const classIIIPin = L.icon({
     iconUrl: classIII,
@@ -55,6 +60,7 @@ function MapMarkers({ saveMarkers }) {
                 setClickCoordinates({ lat, lng });
                 setOpenForm(true);
                 console.log("click coords:", clickCoordinates)
+                console.log("click position:", clickPosition)
             }
         },
     });
@@ -108,12 +114,13 @@ function MapMarkers({ saveMarkers }) {
 }
 
 function Map() {
-
+    const [commentsVisible, setCommentsVisible] = useState({});
     const [pins, setPins] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
 
     const { loading, data, refetch } = useQuery(QUERY_PINS);
     const [addPin] = useMutation(ADD_PIN);
+    const [addComment] = useMutation(ADD_COMMENT);
 
     useEffect(() => {
         if (!loading && data) {
@@ -140,24 +147,9 @@ function Map() {
         }
     }, []);
 
-    // const saveMarkers = async (newMarker) => {
-    //     try {
-    //         const { data } = await addPin({
-    //             variables: {
-    //                 pinLat: newMarker.coords[0],
-    //                 pinLon: newMarker.coords[1],
-    //                 pinTitle: newMarker.title,
-    //             },
-    //         });
-    //         console.log('Response Data:', data);
-    //         setPins((prevPins) => [...prevPins, newMarker]);
-    //     } catch (error) {
-    //         console.error('Error saving pin:', error);
-    //     }
-    // };
-
     const saveMarkers = async (formValues) => {
         try {
+            console.log("formValues:", formValues);
             const { data } = await addPin({
                 variables: {
                     pinLat: formValues.lat,
@@ -166,6 +158,7 @@ function Map() {
                     pinText: formValues.description,
                 },
             });
+            console.log('pinText:', formValues.description)
             console.log('Response Data:', data);
             refetch();
         } catch (error) {
@@ -175,6 +168,10 @@ function Map() {
     
 
     const defaultCenter = [40.7196, -74.0066];
+
+    const toggleComments = (pinId) => {
+        setCommentsVisible((prev) => ({ ...prev, [pinId]: !prev[pinId] }));
+    };
 
     return (
         <div>
@@ -191,34 +188,22 @@ function Map() {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {pins &&
-                        pins.map((pin, index) =>
-                            pin.pinLat ? (
-                                <Marker
-                                    key={index}
-                                    position={[pin.pinLat, pin.pinLon]}
-                                    icon={classIIIPin}
-                                >
-                                    <Popup>
-                                        Marker at {pin.pinLon}, {pin.pinLat}
-                                        <br />
-                                        Pin Title {pin.pinTitle}
-                                        <br />
-                                        <form class="popup-form">
-                                            <div class="form-group">
-                                                <label class="mb-0" for="comment">Pin Description</label>
-                                                <textarea class="form-control comment" rows="4"></textarea>
-                                            </div>
-                                            <div class="d-flex">
-                                                <button type="submit" class="btn">Save</button>
-                                            </div>
-                                        </form>
+                        {pins &&
+                            pins.map((pin, index) =>
+                                pin.pinLat ? (
+                                    <Marker key={index} position={[pin.pinLat, pin.pinLon]} icon={classIIIPin}>
+                                        <Popup>
+                                            <PinCard
+                                                pin={pin}
+                                                commentsVisible={commentsVisible}
+                                                toggleComments={toggleComments}
+                                                />
+                                            <RemovePin pinId={pin._id} onDelete={refetch}/>
+                                        </Popup>
+                                    </Marker>
+                                ) : null
+                            )}
 
-                                        <RemovePin pinId={pin._id} onDelete={refetch}/>
-                                    </Popup>
-                                </Marker>
-                            ) : null
-                        )}
                     <MapMarkers saveMarkers={saveMarkers} />
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>
