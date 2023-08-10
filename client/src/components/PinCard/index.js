@@ -37,10 +37,7 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
     };
 
     const handleCardClick = (e) => {
-        // Prevent the click event from reaching the parent elements
         e.stopPropagation();
-
-        // Call the toggleComments function
         toggleComments(pin._id);
     };
 
