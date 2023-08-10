@@ -56,17 +56,11 @@ export const ADD_PIN = gql`
 
 export const ADD_COMMENT = gql`
   mutation addComment($pinId: ID!, $commentText: String!) {
-    addComment(pintId: $pinId, commentText: $commentText) {
+    addComment(pinId: $pinId, commentText: $commentText) {
       _id
-      pinText
-      pinAuthor
+      commentText
+      commentAuthor
       createdAt
-      comments {
-        _id
-        commentText
-        commentAuthor
-        createdAt
-      }
     }
   }
 `;
