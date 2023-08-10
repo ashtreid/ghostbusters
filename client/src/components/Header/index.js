@@ -6,6 +6,8 @@ import SignupForm from '../SignupForm'
 
 import Auth from '../../utils/auth';
 
+import bustin from '../../customIcons/bustin.png';
+
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const logout = (event) => {
@@ -17,8 +19,12 @@ const Header = () => {
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            Ghostbusters
+          <Navbar.Brand as={Link} to='/'className="glow-text">
+            GH<img
+              src={bustin}
+              alt="Logo"
+              className="bustinLogo"
+            />STBUSTERS
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls='navbar' />

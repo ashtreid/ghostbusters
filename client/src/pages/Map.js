@@ -112,6 +112,16 @@ function Map() {
                                         <br />
                                         Comment: {pin.pinTitle}
                                         {/* more stuff! */}
+                                        <form class="popup-form">  
+                                          <div class="form-group">
+                                            <label class="mb-0" for="comment">Comment:</label>
+                                            <textarea class="form-control, comment" rows="4"></textarea>
+                                          </div>
+                                          <div class="d-flex">  
+                                            <button type="submit" class="btn btn-outline-info btn-sm">Save</button>
+                                            <button class="delete-button">Delete</button>
+                                          </div>
+                                        </form>
                                     </Popup>
                                 </Marker>
                             ) : null // If coords property doesn't exist, skip rendering the Marker

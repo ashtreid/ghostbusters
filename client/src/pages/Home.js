@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import OffCanvas from '../components/OffCanvas';
 
@@ -7,21 +7,39 @@ import telephone from '../customIcons/telephone.gif';
 import people from '../customIcons/people.png';
 import paranoid from '../customIcons/paranoid.png';
 import basement from '../customIcons/basement.png';
+import bustinSong from '../audioElement/Ghostbusters.mp3';
 
-
-// import { useQuery } from '@apollo/client';
-
-// import ThoughtList from '../components/ThoughtList';
-// import ThoughtForm from '../components/ThoughtForm';
-
-// import { QUERY_THOUGHTS } from '../utils/queries';
+import bustin from '../customIcons/bustin.png';
 
 const GhostBustersAd = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1280);
+
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth <= 1280);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const gbVideoURL = 'https://www.youtube.com/watch?v=sRee26pfVzU';
+
   return (
+    <div>
+    {isSmallScreen ? (
+      <div className="alternate-video">
+       <a href={gbVideoURL} target="_blank" rel="noopener noreferrer">
+       <img src={bustin} alt="Logo" className='vid-logo'/>
+       </a> 
+      </div>
+    ) : (
     <div className='video-responsive'>
       <iframe
-        width="560"
-        height="315"
+        width="1200"
+        height="720"
         src="https://www.youtube.com/embed/sRee26pfVzU"
         title="YouTube video player"
         frameborder="0"
@@ -29,8 +47,19 @@ const GhostBustersAd = () => {
         allowfullscreen>
       </iframe>
     </div>
+    )}
+    </div>
   );
 };
+
+function AudioComponent() {
+  return (
+    <audio controls autoPlay>
+      <source src={bustinSong} type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  );
+}
 
 const Home = () => {
 //   const { loading, data } = useQuery(QUERY_THOUGHTS);
@@ -45,8 +74,8 @@ const Home = () => {
             <p>Are you troubled by strange noises in the middle of the night?</p>
             <a href='https://www.flaticon.com/free-icons/unease' target='_blank' rel='noreferrer'>
             <Figure.Image
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               src={paranoid}
               alt='unease icons'
               title='Unease icons created by Leremy - Flaticon' 
@@ -57,8 +86,8 @@ const Home = () => {
             <p>Do you experience feelings of dread in your basement or attic?</p>
             <a href='https://www.flaticon.com/free-icons/peeping' target='_blank' rel='noreferrer'>
             <Figure.Image
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               src={basement}
               alt='peeping icons'
               title='Peeping icons created by Leremy - Flatico' 
@@ -69,8 +98,8 @@ const Home = () => {
             <p>Have you or any of your family ever seen a spook, specter, or ghost?</p>
             <a href='https://www.flaticon.com/free-icons/haunt' target='_blank' rel='noreferrer'>
             <Figure.Image
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               src={people}
               alt='haunt icons'
               title="Haunt icons created by Leremy - Flaticon" 
@@ -93,6 +122,7 @@ const Home = () => {
         </Carousel>
         <Col className='text-center'>
           <GhostBustersAd />
+          <AudioComponent /> {AudioComponent}
         </Col>
       </Row>
     </Container>

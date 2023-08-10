@@ -11,16 +11,19 @@ const Footer = () => {
                 </p>
                 <Row>
                     <Col className='text-center'>
-                        <p>Phone: ###-###-####</p>
+                        <p>Phone: (216)-BG5-2368</p>
                     </Col>
                     <Col className='text-center'>
-                        <p>Fax: ###-###-####</p>
+                        <p>Fax: (216)-BG5-2368</p>
                     </Col>
                     <Col className='text-center'>
-                        <p>Pager: ###-###-####</p>
+                        <p>Pager: 216242368</p>
                     </Col>
                     <Col className='text-center'>
-                        <p>[Address Here]</p>
+                        <p>14 North Moore street
+                        New York, New York, 10013
+                        United States
+                        </p>
                     </Col>
                 </Row>
 

@@ -14,6 +14,8 @@
 
 .ad {
   padding-top: 60px;
+  font-family: 'Denk One', sans-serif;                                             
+  font-size: 35px;
 }
 
 .video-responsive {
@@ -23,6 +25,45 @@
 .video-responsive iframe {
   left: 0;
   top: 0;
+}
+
+@media (max-width: 1280px) {
+  .video-responsive {
+   display: none;
+  }
+  .alternate-video {
+    display: block;
+  }
+}
+
+.vid-logo {
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+/* Header icon */
+.bustinLogo {
+  width: 150px;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(12, 214, 255, 1);
+}
+
+.navbar-brand {
+  /* Styling for the text */
+  font-family: 'Adamina', serif;
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+}
+
+#navbar{
+  font-size: 30px;
+}
+
+.p-3 {
+  font-size: 20px;
 }
 
 /* .App-logo {
