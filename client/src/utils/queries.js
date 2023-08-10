@@ -82,19 +82,27 @@ export const QUERY_PINS = gql`
   }
 `;
 
+// export const QUERY_SINGLE_PIN = gql`
+//   query getSinglepin($pinId: ID!) {
+//     pin(pinId: $pinId) {
+//       _id
+//       pinTitle
+//       pinAuthor
+//       createdAt
+//       comments {
+//         _id
+//         commentText
+//         commentAuthor
+//         createdAt
+//       }
+//     }
+//   }
+// `;
+
 export const QUERY_SINGLE_PIN = gql`
-  query getSinglepin($pinId: ID!) {
-    pin(pinId: $pinId) {
+  query getSinglepin {
+    pin {
       _id
-      pinText
-      pinAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        commentAuthor
-        createdAt
-      }
     }
   }
 `;

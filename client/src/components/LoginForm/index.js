@@ -50,8 +50,9 @@ const LoginForm = () => {
       ) : (
       <Form onSubmit={handleFormSubmit}>
         <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label className='auth-label' htmlFor='email'>Email</Form.Label>
           <Form.Control
+            className='auth-input'
             type='text'
             placeholder='Your email'
             name='email'
@@ -63,8 +64,9 @@ const LoginForm = () => {
         </Form.Group>
 
         <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Label className='auth-label' htmlFor='password'>Password</Form.Label>
           <Form.Control
+            className='auth-input'
             type='password'
             placeholder='Your password'
             name='password'

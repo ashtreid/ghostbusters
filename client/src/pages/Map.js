@@ -3,8 +3,10 @@ import { useMutation, useQuery } from '@apollo/client';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+
 import OffCanvas from '../components/OffCanvas';
 import FormModal from '../components/NewPinModal';
+import RemovePin from '../components/RemovePins';
 import PinCard from '../components/PinCard'
 import CommentsComponent from '../components/PinComments';
 
@@ -38,6 +40,7 @@ function MapMarkers({ saveMarkers }) {
     const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
     const [clickCoordinates, setClickCoordinates] = useState({ lat: 0, lng: 0 });
 
+    //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
     const handleFormSubmit = (values) => {
         saveMarkers(values);
         setOpenForm(false); 
@@ -60,6 +63,37 @@ function MapMarkers({ saveMarkers }) {
             }
         },
     });
+    //////// ORIGINAL FORMSUBMIT AND MAPEVENTS //////////////
+
+    //////// NEW FORMSUBMIT AND MAPEVENTS //////////////
+    // const handleFormSubmit = async (lat, lng) => {
+    //     try {
+    //         console.log("SUBMITTING FORM")
+    //         const newMarker = {
+    //             title: formValues.title,
+    //             coords: [lat, lng],
+    //         };
+    //         await saveMarkers(newMarker);
+    //         setOpenForm(false);
+    //     } catch (error) {
+    //         console.error('Error saving pin:', error);
+    //     }
+    // };
+
+    // useMapEvents({
+    //     click: (e) => {
+    //         const { lat, lng } = e.latlng;
+    //         if (!openForm) {
+    //             setFormValues({
+    //                 title: '',
+    //                 description: '',
+    //             });
+    //             setOpenForm(true);
+    //         }
+    //     },
+    // });
+
+    //////// NEW FORMSUBMIT AND MAPEVENTS //////////////
 
     return (
         <>
@@ -82,7 +116,8 @@ function Map() {
     const [commentsVisible, setCommentsVisible] = useState({});
     const [pins, setPins] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
-    const { loading, data } = useQuery(QUERY_PINS);
+
+    const { loading, data, refetch } = useQuery(QUERY_PINS);
     const [addPin] = useMutation(ADD_PIN);
     const [addComment] = useMutation(ADD_COMMENT);
 
@@ -102,15 +137,13 @@ function Map() {
                 },
                 (error) => {
                     console.error('Error getting user location:', error);
-                    setUserLocation([40.7196, -74.0066]); // Set default location
+                    setUserLocation([40.7196, -74.0066]);
                 }
             );
         } else {
             console.error('Geolocation is not supported.');
-            setUserLocation([40.7196, -74.0066]); // Set default location
+            setUserLocation([40.7196, -74.0066]);
         }
-
-
     }, []);
 
     const saveMarkers = async (formValues) => {
@@ -126,7 +159,7 @@ function Map() {
             });
             console.log('pinText:', formValues.description)
             console.log('Response Data:', data);
-            setPins((prevPins) => [...prevPins, formValues]);
+            refetch();
         } catch (error) {
             console.error('Error saving pin:', error);
         }
@@ -164,13 +197,13 @@ function Map() {
                                                 commentsVisible={commentsVisible}
                                                 toggleComments={toggleComments}
                                                 />
+                                            <RemovePin pinId={pin._id} onDelete={refetch}/>
                                         </Popup>
                                     </Marker>
                                 ) : null
                             )}
 
                     <MapMarkers saveMarkers={saveMarkers} />
-                    {/* Ghostbusters HQ marker, Do not change */}
                     <Marker position={[40.7196, -74.0066]} icon={ghostBustin}></Marker>
                 </MapContainer>
             ) : (
