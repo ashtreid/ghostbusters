@@ -47,7 +47,9 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
 
     return (
         <Card >
+            <Card.Header>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Header>
             <Card.Body>
+                <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
                 <Card.Title>{pin.pinTitle}</Card.Title>
                 <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
                 <Card.Text>{pin.pinText}</Card.Text>
