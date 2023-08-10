@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button'
 import { useMutation } from '@apollo/client';
 import { REMOVE_PIN } from '../../utils/mutations';
 
@@ -35,7 +36,7 @@ const RemovePin = ({ pinId, onDelete }) => {
 
     return (
         <div>
-            <button onClick={deleteHandle} disabled={loading}>Delete Pin</button>
+            <Button variant="danger" onClick={deleteHandle} disabled={loading}>Delete Pin</Button>
             {loading && <p>Deleting...</p>}
             {error && <p>Error: {error.message}</p>}
         </div>
