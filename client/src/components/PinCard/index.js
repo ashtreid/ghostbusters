@@ -5,7 +5,7 @@ import CommentsComponent from '../PinComments';
 import { useMutation } from '@apollo/client';
 import { ADD_COMMENT } from '../../utils/mutations';
 
-function PinCard({ pin, commentsVisible, toggleComments }) {
+function PinCard({ pin, commentsVisible, toggleComments, updatePin }) {
     const [commentFormValue, setCommentForm] = useState('');
     const [addComment] = useMutation(ADD_COMMENT);
 
@@ -19,7 +19,11 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
                     commentText: commentFormValue,
                 },
             });
-            console.log("data:", data);
+
+            // Assuming that the data returned includes the updated pin object
+            // with the new comment added
+            updatePin(data.addComment);
+
             setCommentForm('');
         } catch (error) {
             console.error('Error adding comment:', error);
@@ -43,6 +47,8 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
                 {commentsVisible[pin._id] && (
                     <CommentsComponent comments={pin.comments} />
                 )}
+                {/* ... other card content ... */}
+                
                 <Form>
                     <Form.Group>
                         <Form.Label className="mb-0" htmlFor="comment"></Form.Label>
@@ -66,10 +72,8 @@ function PinCard({ pin, commentsVisible, toggleComments }) {
 }
 
 export default PinCard;
-
-
 // import React, { useState } from 'react';
-// import { Card } from 'react-bootstrap';
+// import { Card, Form, Button } from 'react-bootstrap';
 // import CommentsComponent from '../PinComments';
 
 // import { useMutation } from '@apollo/client';
@@ -81,7 +85,6 @@ export default PinCard;
 
 //     const handleCommentSubmit = async (e) => {
 //         e.preventDefault();
-//         console.log("commentText:", commentFormValue);
 
 //         try {
 //             const { data } = await addComment({
@@ -102,9 +105,7 @@ export default PinCard;
 //     };
 
 //     return (
-//         <Card
-//             onClick={() => toggleComments(pin._id)}
-//         >
+//         <Card onClick={() => toggleComments(pin._id)}>
 //             <Card.Body>
 //                 <Card.Title>{pin.pinTitle}</Card.Title>
 //                 <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
@@ -116,10 +117,10 @@ export default PinCard;
 //                 {commentsVisible[pin._id] && (
 //                     <CommentsComponent comments={pin.comments} />
 //                 )}
-//                 <div className="popup-form">
-//                     <div className="form-group">
-//                         <label className="mb-0" htmlFor="comment"></label>
-//                         <input
+//                 <Form>
+//                     <Form.Group>
+//                         <Form.Label className="mb-0" htmlFor="comment"></Form.Label>
+//                         <Form.Control
 //                             className="input"
 //                             type="text"
 //                             name="text"
@@ -127,12 +128,12 @@ export default PinCard;
 //                             onChange={handleInputChange}
 //                             placeholder="Enter a comment!"
 //                         />
-//                     </div>
+//                     </Form.Group>
 //                     <div className="d-flex">
-//                         <button type="button" className="btn" onClick={handleCommentSubmit}>Save</button>
-//                         <button className="delete-button">Delete</button>
+//                         <Button type="button" className="btn" onClick={handleCommentSubmit}>Save</Button>
+//                         <Button className="delete-button">Delete</Button>
 //                     </div>
-//                 </div>
+//                 </Form>
 //             </Card.Body>
 //         </Card>
 //     );
@@ -140,39 +141,3 @@ export default PinCard;
 
 // export default PinCard;
 
-
-
-//     return (
-//         <Card
-//             onClick={() => toggleComments(pin._id)}
-//         >
-//             <Card.Body>
-//                 <Card.Title>{pin.pinTitle}</Card.Title>
-//                 <Card.Text>Coords: ({pin.pinLat.toFixed(4)},  {pin.pinLon.toFixed(4)})</Card.Text>
-//                 <Card.Text>{pin.pinText}</Card.Text>
-//                 <Card.Footer>By {pin.pinAuthor} on {pin.createdAt}</Card.Footer>
-//                 {!commentsVisible[pin._id] && (
-//                     <Card.Text>Click to view comments</Card.Text>
-//                 )}
-//                 {commentsVisible[pin._id] && (
-//                     <CommentsComponent comments={pin.comments} />
-//                 )}
-//                 <form className="popup-form" onSubmit={handleCommentSubmit}>
-//                     <div className="form-group">
-//                         <label className="mb-0" htmlFor="comment"></label>
-//                         <textarea
-//                             className="form-control comment"
-//                             rows="4"
-//                             value={commentForm}
-//                             onChange={(e) => setCommentForm(e.target.value)}
-//                         ></textarea>
-//                     </div>
-//                     <div className="d-flex">
-//                         <button type="submit" className="btn">Save</button>
-//                         <button className="delete-button">Delete</button>
-//                     </div>
-//                 </form>
-//             </Card.Body>
-//         </Card>
-//     );
-// }
