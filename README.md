@@ -1,7 +1,7 @@
 # Ghostbusters ![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 
 ## Description 
-Welcome to the [**Ghostbusters Website**](https://sitename.herokuapp.com/) - an interactive and responsive single-page MERN stack application. 
+Welcome to the [**Ghostbusters Website**](http://triskaidekaphobia-48aedc7fe5ca.herokuapp.com/) - an interactive and responsive single-page MERN stack application. 
 
 This site offers users a place to find information about the Ghostbuster and contact the team directly. Additionally, users can also view the paranormal map to see where spooky activity has been reported in their vicitiny. If users have had their own paranormal experiences they'd like to report, they can register an account or login, allowing them to comment on existing sightings and drop pins of their own to share stories about their interactions with the strange, unusual, and spooky.
 
@@ -26,7 +26,7 @@ This site offers users a place to find information about the Ghostbuster and con
 N/A
 
 ## Usage 
-1. Click here to navigate to the *[Ghostbusters Website](https://sitename.herokuapp.com/)*. 
+1. Click here to navigate to the *[Ghostbusters Website](http://triskaidekaphobia-48aedc7fe5ca.herokuapp.com/)*. 
 2. Meet the Ghostbusters team and when you're ready to book a service, give them a call, fax, or send them an email!
 3. Click the paranormal map to view where spooky activity has been reported in your area.
 4. Register an account or login to comment on other users' pins or to drop pins of your own! 
