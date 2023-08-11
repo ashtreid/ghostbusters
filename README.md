@@ -17,7 +17,7 @@ This site offers users a place to find information about the Ghostbuster and con
 * [Questions](#questions)
 
 ## Screenshot
-![Screenshot of Ghostbusters Homepage.](./client/src/customIcons/ghostbusters-blackbackground.png)
+![Screenshot of the Ghostbusters Logo.](./client/src/customIcons/ghostbusters-blackbackground.png)
 
 ## Presentation
 [Ghostbusters Presentation Slides](https://www.canva.com/design/DAFrLnynidM/mDmzyn7WFDcBKy64ZldHNA/view?utm_content=DAFrLnynidM&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
@@ -43,16 +43,18 @@ A big thank you to the Ghostbusters team, without whom this project would not ha
 This application is covered under the [MIT](https://opensource.org/licenses/MIT) license.
 
 ## Features 
-This project is built using the MERN stack and utilizes queries and mutations to interact with the database via the following technologies:
-* [MongoDB and Mongoose ODM for the database](https://www.mongodb.com/)
-* [Express.js for the server](https://expressjs.com/)
-* [Node.js for the backend](https://nodejs.org/en/)
-* [React for the frontend](https://reactjs.org/)
-* [GraphQL for handling queries and mutations](https://graphql.org/)
-* [Apollo Server for connecting the GraphQL server to the Express.js server](https://www.apollographql.com/docs/apollo-server/)
-* [React Router for routing](https://reactrouter.com/)
-* [JSON Web Tokens (JWT) for authentication and authorization](https://jwt.io/)
-* [bcrypt for hashing and securely storing passwords](https://www.npmjs.com/package/bcrypt)
+This project is built using the ***MERN stack*** and utilizes queries and mutations to interact with the database via the following technologies:
+* [**React Leaflet** for the map](https://react-leaflet.js.org/)
+* [**MongoDB** and **Mongoose ODM** for the database](https://www.mongodb.com/)
+* [**Express.js** for the server](https://expressjs.com/)
+* [**Node.js** for the backend](https://nodejs.org/en/)
+* [**React** for the frontend](https://reactjs.org/)
+* [**GraphQL** for handling queries and mutations](https://graphql.org/)
+* [**Apollo Server** for connecting the GraphQL server to the Express.js server](https://www.apollographql.com/docs/apollo-server/)
+* [**React Router** for routing](https://reactrouter.com/)
+* [**JSON Web Tokens** (JWT) for authentication and authorization](https://jwt.io/)
+* [**bcrypt** for hashing and securely storing passwords](https://www.npmjs.com/package/bcrypt)
+* [**React Bootstrap** for styling](https://react-bootstrap.github.io/)
 
 ## Contributing 
 N/A 
